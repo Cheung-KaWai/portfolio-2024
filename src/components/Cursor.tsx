@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Cursor = () => {
   const circleRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const circlePosition = { x: 0, y: 0 };
@@ -43,9 +44,10 @@ export const Cursor = () => {
       // opacity
       opacity += speed * 0.01;
 
-      if (circleRef.current) {
+      if (circleRef.current && dotRef.current) {
         circleRef.current.style.transform = translate + rotateTransform + scaleTransform;
         circleRef.current.style.opacity = opacity.toString();
+        // dotRef.current.style.opacity = opacity.toString();
       }
       requestAnimationFrame(tick);
     };
@@ -55,8 +57,10 @@ export const Cursor = () => {
     const updateMousePosition = (e: MouseEvent) => {
       mousePosition.x = e.x;
       mousePosition.y = e.y;
-      if (circleRef.current) {
+      if (circleRef.current && dotRef.current) {
         circleRef.current.style.display = "block";
+        dotRef.current.style.display = "block";
+        dotRef.current.style.transform = `translate(${mousePosition.x}px, ${mousePosition.y}px)`;
       }
     };
 
@@ -67,7 +71,12 @@ export const Cursor = () => {
     };
   }, []);
 
-  return <Circle ref={circleRef}></Circle>;
+  return (
+    <>
+      <Circle ref={circleRef} />
+      <Dot ref={dotRef} />
+    </>
+  );
 };
 
 const Circle = styled.div`
@@ -81,4 +90,16 @@ const Circle = styled.div`
   top: -2rem;
   opacity: 0;
   display: none;
+`;
+
+const Dot = styled.div`
+  width: 0.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  left: -0.25rem;
+  top: -0.25rem;
+  display: none;
+  background-color: #0a0a0a;
 `;
