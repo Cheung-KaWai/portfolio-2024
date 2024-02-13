@@ -34,7 +34,10 @@ export const Cursor = () => {
       const deltaCircelMouseX = mousePosition.x - circlePosition.x;
       const deltaCircleMouseY = mousePosition.y - circlePosition.y;
       const calculatedAnlge = Math.atan2(deltaCircleMouseY, deltaCircelMouseX);
-      angle = calculatedAnlge;
+
+      if (mouseVelocity > 10) {
+        angle = calculatedAnlge;
+      }
       const rotateTransform = `rotate(${angle}rad)`;
 
       // opacity
