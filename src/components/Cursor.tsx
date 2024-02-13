@@ -90,6 +90,7 @@ const Circle = styled.div`
   top: -2rem;
   opacity: 0;
   display: none;
+  z-index: 100;
 `;
 
 const Dot = styled.div`
@@ -102,4 +103,5 @@ const Dot = styled.div`
   top: -0.25rem;
   display: none;
   background-color: #0a0a0a;
+  z-index: 100;
 `;

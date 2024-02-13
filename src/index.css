@@ -13,4 +13,5 @@ body {
   font-size: 1.6rem;
   min-height: 100svh;
   width: 100svw;
+  overscroll-behavior: none;
 }
