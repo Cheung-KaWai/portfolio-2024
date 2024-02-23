@@ -12,6 +12,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
 };
 
 const Container = styled.div`
+  height: 100svh;
   min-height: 100svh;
   width: 100svw;
 `;

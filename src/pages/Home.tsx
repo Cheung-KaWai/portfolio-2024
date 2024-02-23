@@ -1,10 +1,10 @@
-import { Background } from "../components/Background";
 import { Layout } from "../components/Layout";
+import { ParticleMorphing } from "./ParticleMorphing";
 
 export const Home = () => {
   return (
     <Layout>
-      <Background />
+      <ParticleMorphing />
     </Layout>
   );
 };
