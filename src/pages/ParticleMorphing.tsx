@@ -1,5 +1,5 @@
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, Float32BufferAttribute, InterleavedBufferAttribute, Mesh, Points, ShaderMaterial, Uniform } from "three";
 import vertex from "../shaders/morphing/vertex.glsl";
@@ -35,6 +35,7 @@ const ParticleMorphingContent = () => {
       uProgress: new Uniform(0),
       uColorA: new Uniform(new Color(controls.colorA)),
       uColorB: new Uniform(new Color(controls.colorB)),
+      uTime: new Uniform(0),
     }),
     []
   );
@@ -104,6 +105,10 @@ const ParticleMorphingContent = () => {
 
     particles.current.shapeIndex = index;
   }
+
+  useFrame((_, delta) => {
+    uniforms.uTime.value += delta;
+  });
 
   return (
     <points ref={pointsRef}>

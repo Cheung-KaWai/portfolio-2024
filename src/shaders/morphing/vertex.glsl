@@ -10,9 +10,11 @@ uniform float uPointSize;
 uniform float uProgress;
 uniform vec3 uColorA;
 uniform vec3 uColorB;
+uniform float uTime;
 
 
 void main(){
+
   float noiseOrigin = simplexNoise3d(position * 0.2);
   float noiseTarget = simplexNoise3d(aPositionTarget * 0.2);
   float noise = mix(noiseOrigin, noiseTarget, uProgress);
@@ -25,6 +27,7 @@ void main(){
 
 
   vec3 mixPosition = mix(position,aPositionTarget,progress);
+  mixPosition.x +=  tan((uTime + aPointSize + noise)*0.5) * noise; 
 
   vec4 modelPosition = modelMatrix * vec4(mixPosition,1.);
   vec4 viewPosition = viewMatrix * modelPosition;
