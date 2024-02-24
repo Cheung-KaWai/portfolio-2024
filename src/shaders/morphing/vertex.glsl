@@ -11,6 +11,7 @@ uniform float uProgress;
 uniform vec3 uColorA;
 uniform vec3 uColorB;
 uniform float uTime;
+uniform bool uAnimate;
 
 
 void main(){
@@ -27,7 +28,9 @@ void main(){
 
 
   vec3 mixPosition = mix(position,aPositionTarget,progress);
-  mixPosition.x +=  tan((uTime + aPointSize + noise)*0.5) * noise; 
+  if(uAnimate){
+    mixPosition.x +=  tan((uTime + aPointSize + noise)*0.5) * noise; 
+  }
 
   vec4 modelPosition = modelMatrix * vec4(mixPosition,1.);
   vec4 viewPosition = viewMatrix * modelPosition;

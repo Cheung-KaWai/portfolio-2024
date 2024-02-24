@@ -36,6 +36,7 @@ const ParticleMorphingContent = () => {
       uColorA: new Uniform(new Color(controls.colorA)),
       uColorB: new Uniform(new Color(controls.colorB)),
       uTime: new Uniform(0),
+      uAnimate: new Uniform(true),
     }),
     []
   );
@@ -79,6 +80,7 @@ const ParticleMorphingContent = () => {
 
   // update values controls
   useEffect(() => {
+    uniforms.uAnimate.value = controls.animate;
     uniforms.uPointSize.value = controls.pointSize;
     uniforms.uProgress.value = controls.progress;
     uniforms.uColorA.value = new Color(controls.colorA);
@@ -121,6 +123,7 @@ const ParticleMorphingContent = () => {
 // debug
 const useDebug = (morph: (index: number) => void) => {
   const [controls, set] = useControls(() => ({
+    animate: true,
     pointSize: {
       value: 50,
       min: 1,
