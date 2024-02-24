@@ -8,42 +8,14 @@ import { useControls } from "leva";
 import { Debug } from "../components/Debug";
 import gsap from "gsap";
 
-type ParticlesProps = {
-  positions: Array<BufferAttribute | InterleavedBufferAttribute>;
-  shapeIndex: number;
-};
-
-// debug
-const useDebug = (morph: (index: number) => void) => {
-  const [controls, set] = useControls(() => ({
-    pointSize: {
-      value: 50,
-      min: 1,
-      max: 100,
-      step: 1,
-    },
-    progress: {
-      value: 0,
-      min: 0,
-      max: 1,
-      step: 0.01,
-    },
-    colorA: "#ff7300",
-    colorB: "#0091ff",
-    object: {
-      options: {
-        cube: 0,
-        sphere: 1,
-      },
-      onChange: (value: number, _: string, options: any) => {
-        if (!options.initial) {
-          morph(value);
-        }
-      },
-    },
-  }));
-
-  return { controls, set };
+export const ParticleMorphing = () => {
+  return (
+    <Canvas>
+      <Debug />
+      <ParticleMorphingContent />
+      <OrbitControls />
+    </Canvas>
+  );
 };
 
 const ParticleMorphingContent = () => {
@@ -141,12 +113,41 @@ const ParticleMorphingContent = () => {
   );
 };
 
-export const ParticleMorphing = () => {
-  return (
-    <Canvas>
-      <Debug />
-      <ParticleMorphingContent />
-      <OrbitControls />
-    </Canvas>
-  );
+// debug
+const useDebug = (morph: (index: number) => void) => {
+  const [controls, set] = useControls(() => ({
+    pointSize: {
+      value: 50,
+      min: 1,
+      max: 100,
+      step: 1,
+    },
+    progress: {
+      value: 0,
+      min: 0,
+      max: 1,
+      step: 0.01,
+    },
+    colorA: "#ff7300",
+    colorB: "#0023ff",
+    object: {
+      options: {
+        cube: 0,
+        sphere: 1,
+        torus: 2,
+      },
+      onChange: (value: number, _: string, options: any) => {
+        if (!options.initial) {
+          morph(value);
+        }
+      },
+    },
+  }));
+
+  return { controls, set };
+};
+
+type ParticlesProps = {
+  positions: Array<BufferAttribute | InterleavedBufferAttribute>;
+  shapeIndex: number;
 };

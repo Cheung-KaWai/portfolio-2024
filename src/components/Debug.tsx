@@ -4,7 +4,6 @@ import { useControls } from "leva";
 
 export const Debug = () => {
   const { showPerf, update } = useGlobal();
-  console.log("Debug rerender");
 
   useControls({
     "perf monitor": {
