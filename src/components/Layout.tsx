@@ -15,5 +15,5 @@ const Container = styled.div`
   height: 100svh;
   min-height: 100svh;
   width: 100svw;
-  background-color: #111111;
+  background-color: #111120;
 `;

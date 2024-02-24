@@ -7,7 +7,7 @@ export const Debug = () => {
 
   useControls({
     "perf monitor": {
-      value: true,
+      value: showPerf,
       onChange: (value) => {
         update({ showPerf: value });
       },

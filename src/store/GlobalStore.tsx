@@ -2,7 +2,7 @@ import { mountStoreDevtool } from "simple-zustand-devtools";
 import { create } from "zustand";
 
 interface GlobalState {
-  showPerf?: boolean;
+  showPerf: boolean;
   update: (options: Partial<GlobalState>) => void;
 }
 
