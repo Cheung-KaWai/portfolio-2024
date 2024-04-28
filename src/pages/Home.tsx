@@ -1,5 +1,5 @@
 import { Layout } from "../components/Layout";
-import { ParticleMorphing } from "./ParticleMorphing";
+import { ParticleMorphing } from "./lab/ParticleMorphing";
 
 export const Home = () => {
   return (
