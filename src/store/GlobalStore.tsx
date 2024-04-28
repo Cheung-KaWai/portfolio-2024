@@ -7,7 +7,7 @@ interface GlobalState {
 }
 
 export const useGlobal = create<GlobalState>((set) => ({
-  showDebug: process.env.NODE_ENV === "development" ? true : false,
+  showDebug: false,
   update: (options) => set((state) => ({ ...state, ...options })),
 }));
 

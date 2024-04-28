@@ -2,7 +2,7 @@ import { Perf } from "r3f-perf";
 import { useGlobal } from "@store/GlobalStore";
 import { useControls } from "leva";
 
-export const Debug = () => {
+export const Performance = () => {
   const { showDebug, update } = useGlobal();
 
   useControls({
@@ -14,5 +14,9 @@ export const Debug = () => {
     },
   });
 
-  return <Perf position="top-left" style={{ display: showDebug ? "block" : "none" }} />;
+  return (
+    <>
+      <Perf position="top-left" style={{ display: showDebug ? "block" : "none" }} />
+    </>
+  );
 };

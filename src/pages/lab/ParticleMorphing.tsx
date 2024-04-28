@@ -5,13 +5,13 @@ import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, Float32Buffer
 import vertex from "@shaders/morphing/vertex.glsl";
 import fragment from "@shaders/morphing/fragment.glsl";
 import { useControls } from "leva";
-import { Debug } from "@components/Debug";
 import gsap from "gsap";
+import { Performance } from "@components/Performance";
 
 export const ParticleMorphing = () => {
   return (
     <Canvas>
-      <Debug />
+      <Performance />
       <ParticleMorphingContent />
       <OrbitControls />
     </Canvas>
