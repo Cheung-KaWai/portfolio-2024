@@ -102,6 +102,6 @@ const Dot = styled.div`
   left: -0.25rem;
   top: -0.25rem;
   display: none;
-  background-color: #0a0a0a;
+  background-color: gray;
   z-index: 100;
 `;

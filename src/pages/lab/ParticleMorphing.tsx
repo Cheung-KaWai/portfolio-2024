@@ -7,19 +7,22 @@ import fragment from "@shaders/morphing/fragment.glsl";
 import { useControls } from "leva";
 import { Debug } from "@components/Debug";
 import gsap from "gsap";
+import { Layout } from "@components/Layout";
 
 export const ParticleMorphing = () => {
   return (
-    <Canvas>
-      <Debug />
-      <ParticleMorphingContent />
-      <OrbitControls />
-    </Canvas>
+    <Layout>
+      <Canvas>
+        <Debug />
+        <ParticleMorphingContent />
+        <OrbitControls />
+      </Canvas>
+    </Layout>
   );
 };
 
 const ParticleMorphingContent = () => {
-  const { scene } = useGLTF("morphing.glb");
+  const { scene } = useGLTF("/morphing.glb");
 
   // debug
   const { controls, set } = useDebug(morph);
