@@ -30,6 +30,7 @@
       "@services/*" : ["services/*"],
       "@shaders/*" : ["shaders/*"],
       "@store/*" : ["store/*"],
+      "@customTypes/*" : ["types/*"],
     }
   },
   "include": ["src"],
