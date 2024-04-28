@@ -1,15 +1,11 @@
 import { getArticles } from "@services/notion";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export const useNotion = () => {
-  const [articles, setArticles] = useState([]);
+  const { data, error, isPending } = useQuery({
+    queryKey: ["articles"],
+    queryFn: getArticles,
+  });
 
-  useEffect(() => {
-    (async () => {
-      const listArticles = await getArticles();
-      setArticles(listArticles);
-    })();
-  }, []);
-
-  return { articles };
+  return { articles: data, error, isPending };
 };
