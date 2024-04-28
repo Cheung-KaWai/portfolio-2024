@@ -5,10 +5,10 @@ export const Blogs = () => {
   const { articles } = useNotion();
 
   return (
-    <div>
+    <>
       {articles?.map((article: Article) => (
         <p key={article.id}>{article.title}</p>
       ))}
-    </div>
+    </>
   );
 };

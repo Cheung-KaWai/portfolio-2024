@@ -1,12 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 import { Cursor } from "@components/Cursor";
 import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 
-export const Layout: FC<PropsWithChildren> = ({ children }) => {
+export const Layout: FC<PropsWithChildren> = () => {
   return (
     <Container>
       <Cursor />
-      {children}
+      <Outlet />
     </Container>
   );
 };

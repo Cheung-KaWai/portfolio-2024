@@ -2,12 +2,12 @@ import { mountStoreDevtool } from "simple-zustand-devtools";
 import { create } from "zustand";
 
 interface GlobalState {
-  showPerf: boolean;
+  showDebug: boolean;
   update: (options: Partial<GlobalState>) => void;
 }
 
 export const useGlobal = create<GlobalState>((set) => ({
-  showPerf: process.env.NODE_ENV === "development" ? true : false,
+  showDebug: process.env.NODE_ENV === "development" ? true : false,
   update: (options) => set((state) => ({ ...state, ...options })),
 }));
 

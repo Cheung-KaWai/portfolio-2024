@@ -7,17 +7,14 @@ import fragment from "@shaders/morphing/fragment.glsl";
 import { useControls } from "leva";
 import { Debug } from "@components/Debug";
 import gsap from "gsap";
-import { Layout } from "@components/Layout";
 
 export const ParticleMorphing = () => {
   return (
-    <Layout>
-      <Canvas>
-        <Debug />
-        <ParticleMorphingContent />
-        <OrbitControls />
-      </Canvas>
-    </Layout>
+    <Canvas>
+      <Debug />
+      <ParticleMorphingContent />
+      <OrbitControls />
+    </Canvas>
   );
 };
 

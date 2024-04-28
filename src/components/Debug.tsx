@@ -3,16 +3,16 @@ import { useGlobal } from "@store/GlobalStore";
 import { useControls } from "leva";
 
 export const Debug = () => {
-  const { showPerf, update } = useGlobal();
+  const { showDebug, update } = useGlobal();
 
   useControls({
     "perf monitor": {
-      value: showPerf,
+      value: showDebug,
       onChange: (value) => {
-        update({ showPerf: value });
+        update({ showDebug: value });
       },
     },
   });
 
-  return <Perf position="top-left" style={{ display: showPerf ? "block" : "none" }} />;
+  return <Perf position="top-left" style={{ display: showDebug ? "block" : "none" }} />;
 };
