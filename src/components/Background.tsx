@@ -1,8 +1,8 @@
 import { OrthographicCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
-import vertex from "../shaders/background/vertex.glsl";
-import fragment from "../shaders/background/fragment.glsl";
+import vertex from "@shaders/background/vertex.glsl";
+import fragment from "@shaders/background/fragment.glsl";
 
 export const Background = () => {
   return (

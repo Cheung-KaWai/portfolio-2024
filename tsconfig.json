@@ -21,7 +21,16 @@
     "noFallthroughCasesInSwitch": true,
     "types": [
       "vite-plugin-glsl/ext",
-    ]
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*" : ["components/*"],
+      "@hooks/*" : ["hooks/*"],
+      "@pages/*" : ["pages/*"],
+      "@services/*" : ["services/*"],
+      "@shaders/*" : ["shaders/*"],
+      "@store/*" : ["store/*"],
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

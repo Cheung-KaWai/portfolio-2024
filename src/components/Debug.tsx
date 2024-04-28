@@ -1,5 +1,5 @@
 import { Perf } from "r3f-perf";
-import { useGlobal } from "../store/GlobalStore";
+import { useGlobal } from "@store/GlobalStore";
 import { useControls } from "leva";
 
 export const Debug = () => {

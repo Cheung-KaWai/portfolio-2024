@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { Cursor } from "./Cursor";
+import { Cursor } from "@components/Cursor";
 import styled from "styled-components";
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
