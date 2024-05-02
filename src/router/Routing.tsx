@@ -3,6 +3,7 @@ import { Home } from "@pages/Home";
 import { ParticleMorphing } from "@pages/lab/ParticleMorphing";
 import { Blogs } from "@pages/blog/Blogs";
 import { Layout } from "@components/Layout";
+import { FuturisticUI } from "@pages/projects/futuristicUI/FuturisticUI";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -12,6 +13,10 @@ export const Routing = () => {
         {
           path: "home",
           element: <Home />,
+        },
+        {
+          path: "project/",
+          children: [{ path: "futuristic_ui", element: <FuturisticUI /> }],
         },
         {
           path: "lab/particle_morphing",
