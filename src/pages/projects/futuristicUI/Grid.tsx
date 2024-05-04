@@ -1,6 +1,6 @@
 import { useThree } from "@react-three/fiber";
-import fragmentShader from "@shaders/futuristicUI/fragment.glsl";
-import vertexShader from "@shaders/futuristicUI/vertex.glsl";
+import fragmentShader from "@shaders/futuristicUI/background/fragment.glsl";
+import vertexShader from "@shaders/futuristicUI/background/vertex.glsl";
 import { useEffect, useMemo, useRef } from "react";
 import { Mesh, Uniform, Vector2 } from "three";
 
