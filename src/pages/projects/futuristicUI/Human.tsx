@@ -1,16 +1,10 @@
 import { useGLTF } from "@react-three/drei";
 import { useEffect, useLayoutEffect, useMemo } from "react";
 import { AdditiveBlending, Color, DoubleSide, ShaderMaterial, Uniform } from "three";
-import fragment from "@shaders/futuristicUI/ribcage/fragment.glsl";
-import vertex from "@shaders/futuristicUI/ribcage/vertex.glsl";
+import fragment from "@shaders/futuristicUI/human/fragment.glsl";
+import vertex from "@shaders/futuristicUI/human/vertex.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
-
-type UniformsProps = {
-  uTime: Uniform;
-  uHolographicColor1: Uniform;
-  uHolographicColor2: Uniform;
-};
 
 const defaultSetting = { holographicColor1: "#5900ff", holographicColor2: "#fff" };
 
@@ -18,7 +12,7 @@ export const Human = () => {
   const { scene } = useGLTF("/human.glb");
   const { clock } = useThree();
 
-  const [controls, _set] = useControls(() => ({
+  const [controls, _set] = useControls("Human", () => ({
     holographicColor1: defaultSetting.holographicColor1,
     holographicColor2: defaultSetting.holographicColor2,
   }));
@@ -28,7 +22,7 @@ export const Human = () => {
     uniforms.uHolographicColor2.value = new Color(controls.holographicColor2);
   }, [controls]);
 
-  const uniforms: UniformsProps = useMemo(
+  const uniforms = useMemo(
     () => ({
       uTime: new Uniform(0),
       uHolographicColor1: new Uniform(new Color(defaultSetting.holographicColor1)),

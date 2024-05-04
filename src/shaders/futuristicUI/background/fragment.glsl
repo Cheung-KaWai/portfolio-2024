@@ -1,5 +1,7 @@
 varying vec2 vUv;
 uniform vec2 uResolution;
+uniform vec3 uGridBackgroundColor;
+uniform vec3 uGridlinesColor;
 
 void main(){
   // make the uv resolution independent and center
@@ -19,6 +21,7 @@ void main(){
   float cellLine = smoothstep(0.,0.02,distToCell);
 
   vec3 color = vec3(cellLine);
+  color = mix(uGridlinesColor,uGridBackgroundColor,cellLine);
 
   gl_FragColor=vec4(color, 1.);
 }
