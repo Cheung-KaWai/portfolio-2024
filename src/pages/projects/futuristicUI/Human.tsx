@@ -6,7 +6,7 @@ import vertex from "@shaders/futuristicUI/human/vertex.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 
-const defaultSetting = { holographicColor1: "#5900ff", holographicColor2: "#fff" };
+const defaultSetting = { holographicColor1: "#0ee4ff", holographicColor2: "#fff" };
 
 export const Human = () => {
   const { scene } = useGLTF("/human.glb");

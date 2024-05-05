@@ -6,8 +6,9 @@ import { useEffect, useMemo, useRef } from "react";
 import { Color, Mesh, Uniform, Vector2 } from "three";
 
 const defaultsetting = {
-  gridBackgroundColor: "#300383",
-  gridLinesColor: "#fff",
+  gridBackgroundColor: "#200552",
+  gridLinesColor: "#1bffdd",
+  // gridLinesColor: "#fff",
 };
 
 export const Grid = () => {

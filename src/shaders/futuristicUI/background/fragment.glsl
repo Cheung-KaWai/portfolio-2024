@@ -1,14 +1,19 @@
+#include ../../helpers/functions.glsl;
+#include helpers.glsl;
+
 varying vec2 vUv;
 uniform vec2 uResolution;
 uniform vec3 uGridBackgroundColor;
 uniform vec3 uGridlinesColor;
+
+#define GRIDSIZE 150.
 
 void main(){
   // make the uv resolution independent and center
   vec2 uv = (vUv - 0.5) * uResolution;
 
   // by using fract it generates a repeating cell that goes from [0, cellWidthPixels]
-  vec2 cell = fract(uv / 30.);
+  vec2 cell = fract(uv / GRIDSIZE);
   
   // center the cell and the values ranges from [0,0.5]
   cell = abs(cell -0.5);
@@ -19,9 +24,15 @@ void main(){
 
   // create the fine lines by using smoothstep
   float cellLine = smoothstep(0.,0.02,distToCell);
+  cellLine = remap(cellLine,0.,1.,0.95,1.);
 
-  vec3 color = vec3(cellLine);
-  color = mix(uGridlinesColor,uGridBackgroundColor,cellLine);
+  // cross sign on intersection of the grid
+  float crosses = clamp(generateCrossOnGrid(uv,GRIDSIZE, 0.01),0.,1.);
+  crosses = remap(crosses,0.,1.,0.,0.05);
+  
 
+  vec3 color = mix(uGridlinesColor,uGridBackgroundColor,cellLine);
+  color = mix(color,uGridlinesColor,crosses);
+  // gl_FragColor=vec4(vec3(crosses), 1.);
   gl_FragColor=vec4(color, 1.);
 }

@@ -1,3 +1,16 @@
+#define PI 3.1415926535897932384626433832795
+
+// return a value between 0 and 1 based on the given value and the min and max range
+float inverseLerp(float v,float minValue,float maxValue){
+  return(v-minValue)/(maxValue-minValue);
+}
+
+// remap values to a min and max range
+float remap(float v,float inMin,float inMax,float outMin,float outMax){
+  float t=inverseLerp(v,inMin,inMax);
+  return mix(outMin,outMax,t);
+}
+
 vec4 permute(vec4 x){ return mod(((x*34.0)+1.0)*x, 289.0); }
 vec4 taylorInvSqrt(vec4 r){ return 1.79284291400159 - 0.85373472095314 * r; }
 
