@@ -3,7 +3,7 @@ import { Grid } from "./Grid";
 import { Human } from "./Human";
 import { Environment } from "@react-three/drei";
 import { useDebug } from "@hooks/useDebug";
-import { Heart } from "./Heart";
+// import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
   useDebug();
@@ -11,7 +11,7 @@ export const FuturisticUI = () => {
     <Canvas>
       <Grid />
       <Human />
-      <Heart />
+      {/* <Heart /> */}
       {/* <OrbitControls /> */}
       {/* <Lightformer /> */}
       <Environment preset="city" />
