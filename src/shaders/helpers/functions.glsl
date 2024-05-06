@@ -79,3 +79,28 @@ float simplexNoise3d(vec3 v)
     m = m * m;
     return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
 }
+
+mat2 rotate2d(float _angle){
+    return mat2(cos(_angle),-sin(_angle),
+                sin(_angle),cos(_angle));
+}
+
+float sdOctogon( in vec2 p, in float r )
+{
+    const vec3 k = vec3(-0.9238795325, 0.3826834323, 0.4142135623 );
+    p = abs(p);
+    p -= 2.0*min(dot(vec2( k.x,k.y),p),0.0)*vec2( k.x,k.y);
+    p -= 2.0*min(dot(vec2(-k.x,k.y),p),0.0)*vec2(-k.x,k.y);
+    p -= vec2(clamp(p.x, -k.z*r, k.z*r), r);
+    return length(p)*sign(p.y);
+}
+
+float sdRing( in vec2 p, in vec2 n, in float r, float th )
+{
+    p.x = abs(p.x);
+   
+    p = mat2x2(n.x,n.y,-n.y,n.x)*p;
+
+    return max( abs(length(p)-r)-th*0.5,
+                length(vec2(p.x,max(0.0,abs(r-p.y)-th*0.5)))*sign(p.x) );
+}

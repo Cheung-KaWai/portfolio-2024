@@ -1,8 +1,9 @@
 import { Canvas } from "@react-three/fiber";
 import { Grid } from "./Grid";
 import { Human } from "./Human";
-import { Environment } from "@react-three/drei";
+import { Environment, OrbitControls } from "@react-three/drei";
 import { useDebug } from "@hooks/useDebug";
+import { HumanGroundFloor } from "./HumanGroundFloor";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -11,8 +12,9 @@ export const FuturisticUI = () => {
     <Canvas>
       <Grid />
       <Human />
+      <HumanGroundFloor />
       {/* <Heart /> */}
-      {/* <OrbitControls /> */}
+      <OrbitControls />
       {/* <Lightformer /> */}
       <Environment preset="city" />
     </Canvas>

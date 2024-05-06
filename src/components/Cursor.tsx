@@ -42,7 +42,7 @@ export const Cursor = () => {
       const rotateTransform = `rotate(${angle}rad)`;
 
       // opacity
-      opacity += speed * 0.01;
+      opacity = Math.min(opacity + speed * 0.01, 0.2);
 
       if (circleRef.current && dotRef.current) {
         circleRef.current.style.transform = translate + rotateTransform + scaleTransform;
@@ -82,7 +82,7 @@ export const Cursor = () => {
 const Circle = styled.div`
   width: 4rem;
   aspect-ratio: 1;
-  border: 1px solid gray;
+  border: 1px solid #14b1ff;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -102,6 +102,6 @@ const Dot = styled.div`
   left: -0.25rem;
   top: -0.25rem;
   display: none;
-  background-color: gray;
+  background-color: #14b1ff;
   z-index: 100;
 `;

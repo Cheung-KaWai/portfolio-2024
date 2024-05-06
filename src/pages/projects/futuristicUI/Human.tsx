@@ -38,7 +38,6 @@ export const Human = () => {
 
   useLayoutEffect(() => {
     if (scene.children[0]) {
-      console.log(scene);
       const sampler = new MeshSurfaceSampler(scene.children[0] as Mesh).build();
       const bufferGeometry = new BufferGeometry();
       const material = new LineBasicMaterial({ color: 0x14b1ff, transparent: true, opacity: 0.15, depthWrite: false });
