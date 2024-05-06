@@ -8,6 +8,7 @@ import { Color, Mesh, Uniform, Vector2 } from "three";
 const defaultsetting = {
   gridBackgroundColor: "#200552",
   gridLinesColor: "#1bffdd",
+  gridSize: 150,
   // gridLinesColor: "#fff",
 };
 
@@ -20,6 +21,7 @@ export const Grid = () => {
       uResolution: new Uniform(new Vector2(window.innerWidth, window.innerHeight)),
       uGridBackgroundColor: new Uniform(new Color(defaultsetting.gridBackgroundColor)),
       uGridlinesColor: new Uniform(new Color(defaultsetting.gridLinesColor)),
+      uGridSize: new Uniform(defaultsetting.gridSize),
     }),
     []
   );
@@ -27,11 +29,13 @@ export const Grid = () => {
   const [controls, _set] = useControls("Grid", () => ({
     uGridBackgroundColor: defaultsetting.gridBackgroundColor,
     uGridlinesColor: defaultsetting.gridLinesColor,
+    uGridSize: defaultsetting.gridSize,
   }));
 
   useEffect(() => {
     uniforms.uGridBackgroundColor.value = new Color(controls.uGridBackgroundColor);
     uniforms.uGridlinesColor.value = new Color(controls.uGridlinesColor);
+    uniforms.uGridSize.value = controls.uGridSize;
   }, [controls]);
 
   useEffect(() => {

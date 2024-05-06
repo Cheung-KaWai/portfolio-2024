@@ -5,15 +5,14 @@ varying vec2 vUv;
 uniform vec2 uResolution;
 uniform vec3 uGridBackgroundColor;
 uniform vec3 uGridlinesColor;
-
-#define GRIDSIZE 150.
+uniform float uGridSize;
 
 void main(){
   // make the uv resolution independent and center
   vec2 uv = (vUv - 0.5) * uResolution;
 
   // by using fract it generates a repeating cell that goes from [0, cellWidthPixels]
-  vec2 cell = fract(uv / GRIDSIZE);
+  vec2 cell = fract(uv / uGridSize);
   
   // center the cell and the values ranges from [0,0.5]
   cell = abs(cell -0.5);
@@ -27,7 +26,7 @@ void main(){
   cellLine = remap(cellLine,0.,1.,0.95,1.);
 
   // cross sign on intersection of the grid
-  float crosses = clamp(generateCrossOnGrid(uv,GRIDSIZE, 0.01),0.,1.);
+  float crosses = clamp(generateCrossOnGrid(uv,uGridSize, 0.01),0.,1.);
   crosses = remap(crosses,0.,1.,0.,0.05);
   
 
