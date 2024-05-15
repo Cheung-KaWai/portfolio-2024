@@ -5,6 +5,7 @@ import { Environment } from "@react-three/drei";
 import { useDebug } from "@hooks/useDebug";
 import { HumanGroundFloor } from "./HumanGroundFloor";
 import { Controls } from "./Controls";
+import { HumanParticles } from "./HumanParticles";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -15,7 +16,9 @@ export const FuturisticUI = () => {
         <Grid />
         <Human />
         <HumanGroundFloor />
+        <HumanParticles />
         <Controls />
+
         {/* <Heart /> */}
 
         <Environment preset="city" />

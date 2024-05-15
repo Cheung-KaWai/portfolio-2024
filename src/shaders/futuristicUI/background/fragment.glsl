@@ -34,4 +34,7 @@ void main(){
   color = mix(color,uGridlinesColor,crosses);
   // gl_FragColor=vec4(vec3(crosses), 1.);
   gl_FragColor=vec4(color, 1.);
+
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
 }

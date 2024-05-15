@@ -82,7 +82,7 @@ export const Cursor = () => {
 const Circle = styled.div`
   width: 4rem;
   aspect-ratio: 1;
-  border: 1px solid #14b1ff;
+  border: 1px solid #0ee4ff;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -102,6 +102,6 @@ const Dot = styled.div`
   left: -0.25rem;
   top: -0.25rem;
   display: none;
-  background-color: #14b1ff;
+  background-color: #0ee4ff;
   z-index: 100;
 `;

@@ -2,12 +2,12 @@ import vertex from "@shaders/futuristicUI/humanGroundFloor/vertex.glsl";
 import fragment from "@shaders/futuristicUI/humanGroundFloor/fragment.glsl";
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { AdditiveBlending, Color, Mesh, Uniform, Vector2 } from "three";
+import { AdditiveBlending, Color, DoubleSide, Mesh, Uniform, Vector2 } from "three";
 import { useControls } from "leva";
 
 const defaultsetting = {
-  circleColor1: "#c2ffff",
-  circleColor2: "#000000",
+  circleColor1: "#4edeff",
+  circleColor2: "#00fff5",
 };
 
 export const HumanGroundFloor = () => {
@@ -49,7 +49,7 @@ export const HumanGroundFloor = () => {
     <mesh position={[0, -1.5, 1.7]} rotation-x={-Math.PI / 2}>
       {/* <mesh position={[0, 0, 3]} ref={planeRef}> */}
       <planeGeometry args={[3, 3]} />
-      <shaderMaterial vertexShader={vertex} fragmentShader={fragment} transparent={true} uniforms={uniforms} blending={AdditiveBlending} />
+      <shaderMaterial vertexShader={vertex} fragmentShader={fragment} transparent={true} uniforms={uniforms} blending={AdditiveBlending} side={DoubleSide} depthWrite={false} />
     </mesh>
   );
 };

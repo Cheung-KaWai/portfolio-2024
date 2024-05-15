@@ -42,13 +42,23 @@ void main(){
 
   //stripes
   float angle = atan(vUv.x - 0.5, vUv.y - 0.5) / (PI * 0.5) + 0.5;
-  float strength = sin(angle * PI * 20.);
+  float strength = sin(angle * PI * 100.);
   strength = smoothstep(0.,stepValue,strength);
 
   float innerCircle4 = distance(vUv,vec2(0.5));
-  innerCircle4 = abs(innerCircle4 - 0.275);
+  innerCircle4 = abs(innerCircle4 - 0.276);
   innerCircle4 = 1. - smoothstep(0.,0.01,innerCircle4);
   innerCircle4 *= strength;
+
+  // stripes 2
+  // float angle2 = atan(vUv.x - 0.5, vUv.y - 0.5) / (PI * 0.5) + 0.5;
+  // float strength2 = sin(angle2 * PI * 2.);
+  // strength2 = smoothstep(0.,stepValue,strength2);
+
+  // float innerCircle5 = distance(vUv,vec2(0.5));
+  // innerCircle5 = abs(innerCircle5 - 0.226);
+  // innerCircle5 = 1. - smoothstep(0.,0.003,innerCircle5);
+  // innerCircle5 *= strength2;
 
 
   // thick ring pattern effect
@@ -59,18 +69,18 @@ void main(){
   float ring3 = clamp(0.,1.,ring1 * ring2 * 10.);
   float ringPattern = distance(vUv,vec2(0.5));
   ringPattern = abs(ringPattern - 0.3);
-  ringPattern = 1.- smoothstep(0.,0.14,ringPattern);
+  ringPattern = 1.- smoothstep(0.,0.12,ringPattern);
   ringPattern *= ring3;
 
+  float humanGroundFloor = clamp(innerCircle + innerCircle2 * line + innerCircle3 * line2  + innerCircle4 + ringPattern , 0.,1.);
+  if(humanGroundFloor <= 0.01){
+    discard;
+  }
 
-
-
-  // if(innerCircle == 0.){
-  //   discard;
-  // }
-
-  float humanGroundFloor = clamp(innerCircle + innerCircle2 * line + innerCircle3 * line2  + innerCircle4 + ringPattern, 0.,1.);
   vec3 color = mix(uCircleColor2,uCircleColor1,humanGroundFloor);
 
   gl_FragColor= vec4(color,humanGroundFloor);
+
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
 }

@@ -33,7 +33,6 @@ void main(){
 
   gl_FragColor = vec4(color,holographic);
 
-
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }
