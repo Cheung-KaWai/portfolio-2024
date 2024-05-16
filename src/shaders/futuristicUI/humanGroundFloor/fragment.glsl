@@ -2,6 +2,7 @@ varying vec2 vUv;
 uniform float uTime;
 uniform vec3 uCircleColor1;
 uniform vec3 uCircleColor2;
+uniform float uProgress;
 
 #include ../../helpers/functions.glsl
 
@@ -22,7 +23,7 @@ void main(){
 
   // rotation animation
   vec2 uv = vUv - vec2(0.5);
-  uv *= rotate2d(sin(uTime * 0.1) * PI * 2.);
+  uv *= rotate2d(uTime * 0.1 * PI * 2.);
   uv += vec2(0.5); 
   float line = abs(uv.x - uv.y) -0.1;
   line = smoothstep(0.,stepValue,line);
@@ -34,7 +35,7 @@ void main(){
 
   // rotation animation
   vec2 uv2 = vUv - vec2(0.5);
-  uv2 *= rotate2d(-sin(uTime * 0.02) * PI);
+  uv2 *= rotate2d(-uTime * 0.02 * PI);
   uv2 += vec2(0.5); 
   float line2 = abs(uv2.x - uv2.y) -0.3;
   line2 = smoothstep(0.,stepValue,line2);
@@ -50,17 +51,6 @@ void main(){
   innerCircle4 = 1. - smoothstep(0.,0.01,innerCircle4);
   innerCircle4 *= strength;
 
-  // stripes 2
-  // float angle2 = atan(vUv.x - 0.5, vUv.y - 0.5) / (PI * 0.5) + 0.5;
-  // float strength2 = sin(angle2 * PI * 2.);
-  // strength2 = smoothstep(0.,stepValue,strength2);
-
-  // float innerCircle5 = distance(vUv,vec2(0.5));
-  // innerCircle5 = abs(innerCircle5 - 0.226);
-  // innerCircle5 = 1. - smoothstep(0.,0.003,innerCircle5);
-  // innerCircle5 *= strength2;
-
-
   // thick ring pattern effect
   float ring =  distance(vUv,vec2(0.5));
   ring = clamp(0.,1. ,mod(ring * 20., 1. ));
@@ -72,14 +62,22 @@ void main(){
   ringPattern = 1.- smoothstep(0.,0.12,ringPattern);
   ringPattern *= ring3;
 
+  // starting animation;
+  float startAnimation = distance(vUv,vec2(0.5));
+  float animationTime = remap(uProgress,0.,0.3,0.,1.);
+  startAnimation = step(animationTime,startAnimation);
+
+
   float humanGroundFloor = clamp(innerCircle + innerCircle2 * line + innerCircle3 * line2  + innerCircle4 + ringPattern , 0.,1.);
   if(humanGroundFloor <= 0.01){
     discard;
   }
 
   vec3 color = mix(uCircleColor2,uCircleColor1,humanGroundFloor);
+  // vec3 color = vec3(startAnimation);
 
-  gl_FragColor= vec4(color,humanGroundFloor);
+  gl_FragColor= vec4(color,mix(humanGroundFloor,0.,startAnimation));
+  // gl_FragColor= vec4(color,1.);
 
   #include <tonemapping_fragment>
   #include <colorspace_fragment>

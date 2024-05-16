@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { AdditiveBlending, Color, DoubleSide, Mesh, Uniform, Vector2 } from "three";
 import { useControls } from "leva";
+import gsap from "gsap";
 
 const defaultsetting = {
   circleColor1: "#4edeff",
@@ -20,6 +21,7 @@ export const HumanGroundFloor = () => {
       uResolution: new Uniform(new Vector2(window.innerWidth, window.innerHeight)),
       uCircleColor1: new Uniform(new Color(defaultsetting.circleColor1)),
       uCircleColor2: new Uniform(new Color(defaultsetting.circleColor2)),
+      uProgress: new Uniform(0),
     }),
     []
   );
@@ -37,9 +39,16 @@ export const HumanGroundFloor = () => {
   useLayoutEffect(() => {
     if (planeRef.current) {
       planeRef.current.geometry.computeBoundingBox();
-      console.log(planeRef);
     }
   }, [planeRef.current]);
+
+  useEffect(() => {
+    gsap.to(uniforms.uProgress, {
+      value: 1,
+      duration: 10,
+      ease: "linear",
+    });
+  }, []);
 
   useFrame(() => {
     uniforms.uTime.value = clock.elapsedTime;

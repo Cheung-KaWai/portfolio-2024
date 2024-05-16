@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { MeshSurfaceSampler } from "three/examples/jsm/Addons.js";
 
 const defaultSettings = {
-  count: 3000,
+  count: 10000,
 };
 
 export const HumanParticles = () => {

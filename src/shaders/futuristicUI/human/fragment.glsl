@@ -4,6 +4,9 @@ varying vec3 vNormal;
 
 uniform vec3 uHolographicColor1;
 uniform float uTime;
+uniform float uProgress;
+
+#include ../../helpers/functions.glsl
 
 void main(){
   // normal
@@ -13,8 +16,9 @@ void main(){
     normal *= -1.;
   }
 
+
   //stripes
-  float stripes = mod((vPosition.y - uTime * 0.2)  * 10.  ,1.);
+  float stripes = mod((vPosition.y - uTime* 0.2)  * 10. ,1.);
   stripes = pow(stripes, 3.);
 
   // fresnel

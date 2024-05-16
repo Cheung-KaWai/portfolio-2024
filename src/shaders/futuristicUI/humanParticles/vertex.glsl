@@ -10,10 +10,13 @@ attribute float aTimeMultiplier;
 
 void main(){
   float progress = uProgress * aTimeMultiplier;
-  vec3 newPosition = mix(position,aPositionHuman,clamp(remap(progress,0.7,1.,0.,1.),0.,1.));
+  vec3 newPosition = mix(position,aPositionHuman,clamp(remap(progress,0.5,0.6,0.,1.),0.,1.));
 
-  float scalingProgress = remap(progress,0.,0.5,0.,1.);
-  scalingProgress = clamp(scalingProgress,0.,1.);
+  float scalingProgressUp = remap(progress,0.3,0.5,0.,1.);
+  float scalingDownProgress = remap(progress,0.7,1.,1.,0.);
+  float scalingProgress = min(scalingProgressUp, scalingDownProgress);
+
+  scalingProgress = clamp(scalingProgress,0.,1.); 
 
 
   vec4 modelPosition = modelMatrix * vec4(newPosition,1.);
