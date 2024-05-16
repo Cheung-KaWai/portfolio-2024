@@ -14,9 +14,11 @@ export const FuturisticUI = () => {
     <>
       <Canvas>
         <Grid />
-        <Human />
-        <HumanGroundFloor />
-        <HumanParticles />
+        <group position={[0, 0.2, 0]}>
+          <Human />
+          <HumanGroundFloor />
+          <HumanParticles />
+        </group>
         <Controls />
 
         {/* <Heart /> */}

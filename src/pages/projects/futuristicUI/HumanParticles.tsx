@@ -17,7 +17,7 @@ export const HumanParticles = () => {
 
   const uniforms = useMemo(
     () => ({
-      uSize: new Uniform(0.1),
+      uSize: new Uniform(0.05),
       uResolution: new Uniform(new Vector2(window.innerWidth, window.innerHeight)),
       uTexture: new Uniform(pattern),
       uProgress: new Uniform(0),
