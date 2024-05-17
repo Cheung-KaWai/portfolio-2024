@@ -16,6 +16,8 @@ void main(){
     normal *= -1.;
   }
 
+  float visible = remap(uProgress,0.4,1.,0.,1.);
+
 
   //stripes
   float stripes = mod((vPosition.y - uTime* 0.2)  * 10. ,1.);
@@ -35,7 +37,7 @@ void main(){
 
   vec3 color = uHolographicColor1;
 
-  gl_FragColor = vec4(color,holographic);
+  gl_FragColor = vec4(color,holographic * visible);
 
   #include <tonemapping_fragment>
   #include <colorspace_fragment>

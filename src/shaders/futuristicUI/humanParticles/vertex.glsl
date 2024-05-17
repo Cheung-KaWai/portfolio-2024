@@ -9,7 +9,7 @@ attribute float aSize;
 attribute float aTimeMultiplier;
 
 void main(){
-  float progress = uProgress * aTimeMultiplier;
+  float progress = uProgress * aTimeMultiplier ;
   vec3 newPosition = mix(position,aPositionHuman,clamp(remap(progress,0.5,0.6,0.,1.),0.,1.));
 
   float scalingProgressUp = remap(progress,0.3,0.5,0.,1.);
@@ -25,6 +25,6 @@ void main(){
 
   gl_Position = projectedPosition;
 
-  gl_PointSize=uSize * uResolution.y * aSize * scalingProgress;
+  gl_PointSize=uSize * uResolution.y * aSize * scalingProgress + 20. * scalingProgress;
   gl_PointSize *= 1. / -viewPosition.z;
 }

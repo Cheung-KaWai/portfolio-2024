@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { AdditiveBlending, BufferGeometry, Color, Float32BufferAttribute, Mesh, ShaderMaterial, Uniform, Vector2, Vector3 } from "three";
 import vertex from "@shaders/futuristicUI/humanParticles/vertex.glsl";
 import fragment from "@shaders/futuristicUI/humanParticles/fragment.glsl";
@@ -7,13 +7,15 @@ import gsap from "gsap";
 import { MeshSurfaceSampler } from "three/examples/jsm/Addons.js";
 
 const defaultSettings = {
-  count: 10000,
+  count: 20000,
 };
 
 export const HumanParticles = () => {
   const { scene } = useGLTF("/human.glb");
   const pattern = useTexture("/pattern2.png");
   pattern.flipY = false;
+
+  const testRef = useRef(null);
 
   const uniforms = useMemo(
     () => ({
@@ -76,7 +78,7 @@ export const HumanParticles = () => {
         positions[index + 2] = cy + distance * Math.sin(angle);
 
         sizeArray[index] = Math.random();
-        timeMultiplierArray[index] = 1 + Math.random();
+        timeMultiplierArray[i] = 1 + Math.random();
 
         sampler.sample(positionOnHuman);
         positionsHuman[index + 0] = positionOnHuman.x;
@@ -91,5 +93,5 @@ export const HumanParticles = () => {
     }
   }, []);
 
-  return <points geometry={geometry} material={material} />;
+  return <points ref={testRef} geometry={geometry} material={material} />;
 };

@@ -6,6 +6,7 @@ import vertex from "@shaders/futuristicUI/human/vertex.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 import { MeshSurfaceSampler } from "three/examples/jsm/Addons.js";
+import gsap from "gsap";
 
 const defaultSetting = { holographicColor1: "#0ee4ff", holographicColor2: "#fff" };
 
@@ -25,22 +26,29 @@ export const Human = () => {
     () => ({
       uTime: new Uniform(0),
       uHolographicColor1: new Uniform(new Color(defaultSetting.holographicColor1)),
+      uProgress: new Uniform(0),
     }),
     []
   );
 
   const shaderMaterial = useMemo(() => new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, uniforms: uniforms, transparent: true, side: DoubleSide, depthWrite: false, blending: AdditiveBlending }), []);
+  const material = useMemo(() => new LineBasicMaterial({ color: 0x14b1ff, transparent: true, opacity: 0, depthWrite: false }), []);
 
   const [lineProps, setLineProps] = useState<{ geometry: null | BufferGeometry; lineMaterial: null | LineBasicMaterial }>({
     geometry: null,
     lineMaterial: null,
   });
 
+  useEffect(() => {
+    gsap.to(uniforms.uProgress, { value: 1, duration: 15 });
+    gsap.to(material, { opacity: 0.15, duration: 3, delay: 8, ease: "back" });
+  }, []);
+
   useLayoutEffect(() => {
     if (scene.children[0]) {
       const sampler = new MeshSurfaceSampler(scene.children[0] as Mesh).build();
       const bufferGeometry = new BufferGeometry();
-      const material = new LineBasicMaterial({ color: 0x14b1ff, transparent: true, opacity: 0.15, depthWrite: false });
+
       const vertices = [];
 
       const tempPosition = new Vector3();
