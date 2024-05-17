@@ -5,14 +5,16 @@ import fragment from "@shaders/futuristicUI/humanParticles/fragment.glsl";
 import { useGLTF, useTexture } from "@react-three/drei";
 import gsap from "gsap";
 import { MeshSurfaceSampler } from "three/examples/jsm/Addons.js";
+import { useThree } from "@react-three/fiber";
 
 const defaultSettings = {
-  count: 20000,
+  count: 30000,
 };
 
 export const HumanParticles = () => {
   const { scene } = useGLTF("/human.glb");
   const pattern = useTexture("/pattern2.png");
+  const { gl } = useThree();
   pattern.flipY = false;
 
   const testRef = useRef(null);
@@ -24,6 +26,7 @@ export const HumanParticles = () => {
       uTexture: new Uniform(pattern),
       uProgress: new Uniform(0),
       uParticleColor: new Uniform(new Color("#0ee4ff")),
+      uPixelRatio: new Uniform(Math.min(window.devicePixelRatio, 2)),
     }),
     []
   );
@@ -32,7 +35,10 @@ export const HumanParticles = () => {
 
   useEffect(() => {
     const fixAspect = () => {
-      uniforms.uResolution.value = new Vector2(window.innerWidth, window.innerHeight);
+      const pixel = Math.min(window.devicePixelRatio, 2);
+      uniforms.uResolution.value = new Vector2(window.innerWidth * pixel, window.innerHeight * pixel);
+      uniforms.uPixelRatio.value = pixel;
+      gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     };
 
     window.addEventListener("resize", fixAspect);

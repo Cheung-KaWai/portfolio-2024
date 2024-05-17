@@ -40,8 +40,8 @@ export const Human = () => {
   });
 
   useEffect(() => {
-    gsap.to(uniforms.uProgress, { value: 1, duration: 15 });
-    gsap.to(material, { opacity: 0.15, duration: 3, delay: 8, ease: "back" });
+    gsap.to(uniforms.uProgress, { value: 1, duration: 12 });
+    gsap.to(material, { opacity: 0.1, duration: 5, delay: 10, ease: "back" });
   }, []);
 
   useLayoutEffect(() => {
