@@ -6,6 +6,7 @@ import { useDebug } from "@hooks/useDebug";
 import { HumanGroundFloor } from "./HumanGroundFloor";
 import { Controls } from "./Controls";
 import { HumanParticles } from "./HumanParticles";
+import { HeartRate } from "./HeartRate";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -18,6 +19,7 @@ export const FuturisticUI = () => {
           <Human />
           <HumanGroundFloor />
           <HumanParticles />
+          <HeartRate />
         </group>
         <Controls />
 

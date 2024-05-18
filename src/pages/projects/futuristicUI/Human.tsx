@@ -41,7 +41,7 @@ export const Human = () => {
 
   useEffect(() => {
     gsap.to(uniforms.uProgress, { value: 1, duration: 12 });
-    gsap.to(material, { opacity: 0.1, duration: 5, delay: 10, ease: "back" });
+    gsap.to(material, { opacity: 0.1, duration: 3, delay: 8.5, ease: "back" });
   }, []);
 
   useLayoutEffect(() => {

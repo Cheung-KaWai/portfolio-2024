@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { Cursor } from "@components/Cursor";
+// import { Cursor } from "@components/Cursor";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import { useDebug } from "@hooks/useDebug";
@@ -12,7 +12,7 @@ export const Layout: FC<PropsWithChildren> = () => {
   return (
     <Container>
       <LevaDebug />
-      <Cursor />
+      {/* <Cursor /> */}
       <Outlet />
     </Container>
   );
