@@ -7,6 +7,7 @@ import { HumanGroundFloor } from "./HumanGroundFloor";
 import { Controls } from "./Controls";
 import { HumanParticles } from "./HumanParticles";
 import { HeartRate } from "./HeartRate";
+import { Heart } from "./Heart";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -23,7 +24,7 @@ export const FuturisticUI = () => {
         </group>
         <Controls />
 
-        {/* <Heart /> */}
+        <Heart />
 
         <Environment preset="city" />
       </Canvas>

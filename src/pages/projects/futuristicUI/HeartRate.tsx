@@ -66,9 +66,9 @@ export const HeartRate = () => {
 
   return (
     <group position={[0.25, 0, 0]}>
-      <Html position={[2.675, 3.0, 0.5]} transform>
+      <Html position={[2.59, 3.0, 0.5]} transform>
         <Label $opacity={show} ref={labelRef}>
-          &nbsp;heart rate&nbsp;
+          &nbsp;pulsatio&nbsp;
         </Label>
       </Html>
       <Html position={[5.595, 3, 0.5]} transform>
@@ -78,7 +78,7 @@ export const HeartRate = () => {
       </Html>
       <mesh position={[3.975, 1.8, 0.5]}>
         <planeGeometry args={[3.5, 2]} />
-        <shaderMaterial vertexShader={vertex} fragmentShader={fragemt} uniforms={uniforms} />
+        <shaderMaterial vertexShader={vertex} fragmentShader={fragemt} uniforms={uniforms} transparent={true} />
       </mesh>
     </group>
   );
