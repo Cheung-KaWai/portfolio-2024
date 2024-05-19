@@ -49,7 +49,7 @@ export const HeartRate = () => {
     gsap.to(uniforms.uShow, {
       value: 1,
       delay: 9,
-      duration: 3,
+      duration: 2,
       onStart: () => {
         setShow(1);
       },
@@ -65,7 +65,7 @@ export const HeartRate = () => {
   });
 
   return (
-    <group position={[0.25, 0, 0]}>
+    <group position={[0.25, -0.2, 0]}>
       <Html position={[2.59, 3.0, 0.5]} transform>
         <Label $opacity={show} ref={labelRef}>
           &nbsp;pulsatio&nbsp;

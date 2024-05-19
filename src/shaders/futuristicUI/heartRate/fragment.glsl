@@ -92,7 +92,7 @@ void main (){
   // sdf
   float d = udCos(normalizeUv, ca, cb, cc, cd );
   float heartbeat = exp(-1.0*abs(d));
-  heartbeat = pow(heartbeat,30.);
+  heartbeat = pow(heartbeat,30. + sin(uTime * 7.) * 10.);
 
   
 //   float color = border + cellLine + heartbeat;
@@ -107,7 +107,7 @@ void main (){
   }
 
 
-  gl_FragColor = vec4(colors * uShow, 1.);
+  gl_FragColor = vec4(colors, 1. * uShow);
 
   #include <tonemapping_fragment>
   #include <colorspace_fragment>

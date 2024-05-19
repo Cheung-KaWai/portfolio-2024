@@ -51,8 +51,8 @@ export const Grid = () => {
   }, []);
 
   return (
-    <mesh ref={grid} position-z={0}>
-      <planeGeometry args={[viewport.width, viewport.height]} />
+    <mesh ref={grid} position-z={-5}>
+      <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
       <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
     </mesh>
   );

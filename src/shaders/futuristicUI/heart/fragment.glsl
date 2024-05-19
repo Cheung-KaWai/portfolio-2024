@@ -6,6 +6,9 @@ uniform vec3 uColor;
 uniform float uFalloff;
 uniform float uFresnelPower;
 uniform float uFresnelAmount;
+uniform float uProgress;
+
+#include ../../helpers/functions.glsl
 
 
 void main(){
@@ -15,6 +18,9 @@ void main(){
   if(!gl_FrontFacing){
     normal *= -1.;
   }
+
+  // Compute transition based on uProgress
+  float transition = clamp(smoothstep(0.0, 1.0, vUv.y - (1.0 - uProgress)),0.,1.);
   
   // fresnel
   vec3 viewDirection= normalize(vPosition - cameraPosition);
@@ -28,7 +34,7 @@ void main(){
 
 
   vec3 color = uColor;
-  gl_FragColor = vec4(color,holographic);
+  gl_FragColor = vec4(color,holographic * transition);
 
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
