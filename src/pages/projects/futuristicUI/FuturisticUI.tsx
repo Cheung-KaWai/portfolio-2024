@@ -1,13 +1,14 @@
 import { Canvas } from "@react-three/fiber";
-import { Grid } from "./Grid";
-import { Human } from "./Human";
+import { Grid } from "./components/Grid";
+import { Human } from "./components/Human";
 import { Environment } from "@react-three/drei";
 import { useDebug } from "@hooks/useDebug";
-import { HumanGroundFloor } from "./HumanGroundFloor";
-import { Controls } from "./Controls";
-import { HumanParticles } from "./HumanParticles";
-import { HeartRate } from "./HeartRate";
-import { Heart } from "./Heart";
+import { HumanGroundFloor } from "./components/HumanGroundFloor";
+import { Controls } from "./components/Controls";
+import { HumanParticles } from "./components/HumanParticles";
+import { HeartRate } from "./components/HeartRate";
+import { Heart } from "./components/Heart";
+import { Brain } from "./components/Brain";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -22,8 +23,8 @@ export const FuturisticUI = () => {
           <HumanParticles />
           <HeartRate />
         </group>
+        <Brain />
         <Controls />
-
         <Heart />
 
         <Environment preset="city" />

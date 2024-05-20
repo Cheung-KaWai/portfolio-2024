@@ -78,7 +78,7 @@ export const Heart = () => {
 
   return (
     <>
-      <primitive object={scene} scale={4.7} position={[3, -6.75, -2.2]} />;
+      <primitive object={scene} scale={4.7} position={[3, -6.75, -2.2]} />
       <Html transform position={[4.23, 0.1, 0.5]}>
         <Label $opacity={show}>&nbsp;cor&nbsp;</Label>
       </Html>
