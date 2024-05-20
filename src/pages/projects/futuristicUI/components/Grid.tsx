@@ -51,9 +51,31 @@ export const Grid = () => {
   }, []);
 
   return (
-    <mesh ref={grid} position-z={-5}>
-      <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
-      <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
-    </mesh>
+    <>
+      <mesh ref={grid} position-z={-5}>
+        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
+        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
+      </mesh>
+      <mesh ref={grid} position={[0, -viewport.height, viewport.width / 2 - 4.2]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
+        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
+      </mesh>
+      <mesh ref={grid} position={[0, viewport.height, viewport.width / 2 - 4.2]} rotation={[Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
+        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
+      </mesh>
+      <mesh ref={grid} position={[-27.3 / 2, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
+        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
+      </mesh>
+      <mesh ref={grid} position={[27.3 / 2, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
+        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
+      </mesh>
+      <mesh ref={grid} position-z={10.3} rotation={[0, Math.PI, 0]}>
+        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
+        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
+      </mesh>
+    </>
   );
 };

@@ -58,7 +58,7 @@ export const BrainParticles: FC<{ curves: Array<CatmullRomCurve3> }> = ({ curves
       for (let j = 0; j < density; j++) {
         myPoints.current.push({
           currentOffset: Math.random(),
-          speed: randomSize[j] * 0.001,
+          speed: Math.random() * 0.001,
           curve: curves[i],
           curPosition: Math.random(),
         });
