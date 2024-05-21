@@ -1,6 +1,6 @@
-import { AdditiveBlending, CatmullRomCurve3, Color, DoubleSide, Uniform, Vector3 } from "three";
+import { AdditiveBlending, CatmullRomCurve3, Color, DoubleSide, Group, Uniform, Vector3 } from "three";
 import { data } from "../data/data";
-import { FC, useEffect, useMemo } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
 import vertex from "@shaders/futuristicUI/brain/vertex.glsl";
@@ -64,9 +64,16 @@ const BrainWave: FC<{ curve: CatmullRomCurve3 }> = ({ curve }) => {
 
 export const Brain = () => {
   const curves = useMemo(() => getCurves(), []);
+  const brainRef = useRef<Group>(null);
+
+  useFrame(({ clock }) => {
+    if (brainRef.current) {
+      brainRef.current.position.y += Math.sin(clock.elapsedTime) * 0.0005;
+    }
+  });
 
   return (
-    <group position={[-4.1, 1.1, 0.3]} rotation={[0, Math.PI / 3, 0]} scale={10}>
+    <group position={[-4.1, 1.1, 0.3]} rotation={[0, Math.PI / 3, 0]} scale={10} ref={brainRef}>
       {curves.map((curve, index) => (
         <BrainWave curve={curve} key={index} />
       ))}

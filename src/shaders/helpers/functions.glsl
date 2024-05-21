@@ -104,3 +104,9 @@ float sdRing( in vec2 p, in vec2 n, in float r, float th )
     return max( abs(length(p)-r)-th*0.5,
                 length(vec2(p.x,max(0.0,abs(r-p.y)-th*0.5)))*sign(p.x) );
 }
+
+  float sdBox( in vec2 p, in vec2 b )
+{
+    vec2 d = abs(p)-b;
+    return length(max(d,0.0)) + min(max(d.x,d.y),0.0);
+}

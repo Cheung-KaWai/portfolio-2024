@@ -10,6 +10,7 @@ import { HeartRate } from "./components/HeartRate";
 import { Heart } from "./components/Heart";
 import { Brain } from "./components/Brain";
 import { BrainInfo } from "./components/BrainInfo";
+import { HumanBorder } from "./components/HumanBorder";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -20,6 +21,7 @@ export const FuturisticUI = () => {
         <Grid />
         <group position={[0, 0.2, 0]}>
           <Human />
+          <HumanBorder />
           <HumanGroundFloor />
           <HumanParticles />
           <HeartRate />

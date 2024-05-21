@@ -7,8 +7,8 @@ import { useControls } from "leva";
 import gsap from "gsap";
 
 const defaultsetting = {
-  circleColor1: "#4edeff",
-  circleColor2: "#00fff5",
+  circleColor1: "#fff",
+  circleColor2: "#fff",
 };
 
 export const HumanGroundFloor = () => {
