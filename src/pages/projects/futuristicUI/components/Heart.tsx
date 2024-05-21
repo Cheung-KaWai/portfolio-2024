@@ -1,4 +1,4 @@
-import { Html, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { AdditiveBlending, Color, DoubleSide, ShaderMaterial, Uniform } from "three";
@@ -8,12 +8,12 @@ import fragment from "@shaders/futuristicUI/heart/fragment.glsl";
 import vertex2 from "@shaders/futuristicUI/heart/borderVertex.glsl";
 import fragment2 from "@shaders/futuristicUI/heart/borderFragment.glsl";
 import { useControls } from "leva";
-import styled from "styled-components";
+// import styled from "styled-components";
 import gsap from "gsap";
 
 export const Heart = () => {
   const { scene } = useGLTF("/heart.glb");
-  const [show, setShow] = useState(0);
+  const [_show, setShow] = useState(0);
 
   const [controls, _] = useControls("Heart", () => ({
     heartColor: "#0ee4ff",
@@ -79,9 +79,9 @@ export const Heart = () => {
   return (
     <>
       <primitive object={scene} scale={4.7} position={[3, -6.75, -2.2]} />
-      <Html transform position={[4.23, 0.1, 0.5]}>
+      {/* <Html transform position={[4.23, 0.1, 0.5]}>
         <Label $opacity={show}>&nbsp;cor&nbsp;</Label>
-      </Html>
+      </Html> */}
       <mesh position={[4.23, -1.3, 0.5]}>
         <planeGeometry args={[3.5, 3.5]} />
         <shaderMaterial vertexShader={vertex2} fragmentShader={fragment2} transparent={true} uniforms={uniforms} />
@@ -90,11 +90,11 @@ export const Heart = () => {
   );
 };
 
-const Label: any = styled.p<{ $opacity: number }>`
-  text-transform: uppercase;
-  display: inline-block;
-  white-space: nowrap;
-  font-size: 0.8rem;
-  opacity: ${(props) => props.$opacity};
-  transition: opacity 0.3s ease-out;
-`;
+// const Label: any = styled.p<{ $opacity: number }>`
+//   text-transform: uppercase;
+//   display: inline-block;
+//   white-space: nowrap;
+//   font-size: 0.8rem;
+//   opacity: ${(props) => props.$opacity};
+//   transition: opacity 0.3s ease-out;
+// `;

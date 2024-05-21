@@ -66,7 +66,7 @@ export const Brain = () => {
   const curves = useMemo(() => getCurves(), []);
 
   return (
-    <group position={[-3.1, 1.3, 0.9]} rotation={[0, Math.PI / 3, 0]} scale={12}>
+    <group position={[-4.1, 1.1, 0.3]} rotation={[0, Math.PI / 3, 0]} scale={10}>
       {curves.map((curve, index) => (
         <BrainWave curve={curve} key={index} />
       ))}

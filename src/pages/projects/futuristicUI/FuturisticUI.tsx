@@ -9,6 +9,7 @@ import { HumanParticles } from "./components/HumanParticles";
 import { HeartRate } from "./components/HeartRate";
 import { Heart } from "./components/Heart";
 import { Brain } from "./components/Brain";
+import { BrainInfo } from "./components/BrainInfo";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -23,7 +24,10 @@ export const FuturisticUI = () => {
           <HumanParticles />
           <HeartRate />
         </group>
-        <Brain />
+        <group position={[0, 0.3, 0]}>
+          <Brain />
+          <BrainInfo />
+        </group>
         <Controls />
         <Heart />
 

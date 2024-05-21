@@ -15,7 +15,7 @@ void main(){
   vec3 finalColor = mix(uBrainColor,uBrainColor* 0.1 ,progress);
   float hideCorners =  smoothstep(0.,0.1,vUv.x);
   float hideCorners2 =  smoothstep(1.,0.9,vUv.x);
-  gl_FragColor = vec4(finalColor, hideCorners * hideCorners2 *effect* uShow);
+  gl_FragColor = vec4(finalColor, hideCorners * hideCorners2 *effect * uShow);
 
 
 
