@@ -8,7 +8,7 @@ import { useControls } from "leva";
 import { MeshSurfaceSampler } from "three/examples/jsm/Addons.js";
 import gsap from "gsap";
 
-const defaultSetting = { holographicColor1: "#fff", holographicColor2: "#fff" };
+const defaultSetting = { holographicColor1: "#0ee4ff", holographicColor2: "#fff" };
 
 export const Human = () => {
   const { scene } = useGLTF("/human.glb");
@@ -32,7 +32,7 @@ export const Human = () => {
   );
 
   const shaderMaterial = useMemo(() => new ShaderMaterial({ fragmentShader: fragment, vertexShader: vertex, uniforms: uniforms, transparent: true, side: DoubleSide, depthWrite: false, blending: AdditiveBlending }), []);
-  const material = useMemo(() => new LineBasicMaterial({ color: "#fff", transparent: true, opacity: 0, depthWrite: false }), []);
+  const material = useMemo(() => new LineBasicMaterial({ color: 0x14b1ff, transparent: true, opacity: 0, depthWrite: false }), []);
 
   const [lineProps, setLineProps] = useState<{ geometry: null | BufferGeometry; lineMaterial: null | LineBasicMaterial }>({
     geometry: null,

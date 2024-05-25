@@ -11,6 +11,7 @@ import { Heart } from "./components/Heart";
 import { Brain } from "./components/Brain";
 import { BrainInfo } from "./components/BrainInfo";
 import { HumanBorder } from "./components/HumanBorder";
+import { Dna } from "./components/Dna";
 // import { Heart } from "./Heart";
 
 export const FuturisticUI = () => {
@@ -32,6 +33,7 @@ export const FuturisticUI = () => {
         </group>
         <Controls />
         <Heart />
+        <Dna />
 
         <Environment preset="city" />
       </Canvas>

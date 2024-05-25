@@ -61,7 +61,7 @@ void main(){
   dots *= stripes * cutout;
   dots = pow(dots,10.);
 
-  float alpha = glow + shape + dots;
+  float alpha = shape + dots + glow;
   
 
 

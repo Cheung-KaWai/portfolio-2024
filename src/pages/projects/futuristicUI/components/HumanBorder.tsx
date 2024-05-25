@@ -8,7 +8,7 @@ import gsap from "gsap";
 
 export const HumanBorder = () => {
   const [controls, _] = useControls("Human", () => ({
-    borderColor: "#fff",
+    borderColor: "#00ffbc",
   }));
 
   const uniforms = useMemo(

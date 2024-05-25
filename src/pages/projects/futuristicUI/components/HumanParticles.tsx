@@ -25,7 +25,7 @@ export const HumanParticles = () => {
       uResolution: new Uniform(new Vector2(window.innerWidth, window.innerHeight)),
       uTexture: new Uniform(pattern),
       uProgress: new Uniform(0),
-      uParticleColor: new Uniform(new Color("#fff")),
+      uParticleColor: new Uniform(new Color("#0ee4ff")),
       uPixelRatio: new Uniform(Math.min(window.devicePixelRatio, 2)),
     }),
     []
