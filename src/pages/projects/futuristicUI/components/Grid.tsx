@@ -21,6 +21,7 @@ export const Grid = () => {
       uResolution: new Uniform(new Vector2(window.innerWidth, window.innerHeight)),
       uGridBackgroundColor: new Uniform(new Color(defaultsetting.gridBackgroundColor)),
       uGridlinesColor: new Uniform(new Color(defaultsetting.gridLinesColor)),
+      uDotColor: new Uniform(new Color("#26393b")),
       uGridSize: new Uniform(defaultsetting.gridSize),
     }),
     []
@@ -29,12 +30,14 @@ export const Grid = () => {
   const [controls, _set] = useControls("Grid", () => ({
     uGridBackgroundColor: defaultsetting.gridBackgroundColor,
     uGridlinesColor: defaultsetting.gridLinesColor,
+    uDotColor: "#26393b",
     uGridSize: defaultsetting.gridSize,
   }));
 
   useEffect(() => {
     uniforms.uGridBackgroundColor.value = new Color(controls.uGridBackgroundColor);
     uniforms.uGridlinesColor.value = new Color(controls.uGridlinesColor);
+    uniforms.uDotColor.value = new Color(controls.uDotColor);
     uniforms.uGridSize.value = controls.uGridSize;
   }, [controls]);
 
@@ -56,26 +59,6 @@ export const Grid = () => {
         <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
         <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
       </mesh>
-      {/* <mesh ref={grid} position={[0, -viewport.height, -5 + viewport.height]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
-        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
-      </mesh>
-      <mesh ref={grid} position={[0, viewport.height, -5 + viewport.height]} rotation={[Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
-        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
-      </mesh>
-      <mesh ref={grid} position={[-viewport.width, 0, viewport.width - 5]} rotation={[0, Math.PI / 2, 0]}>
-        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
-        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
-      </mesh>
-      <mesh ref={grid} position={[viewport.width, 0, viewport.width - 5]} rotation={[0, -Math.PI / 2, 0]}>
-        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
-        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
-      </mesh>
-      <mesh ref={grid} position-z={-5 + viewport.height * 2} rotation={[0, Math.PI, 0]}>
-        <planeGeometry args={[viewport.width * 2, viewport.height * 2]} />
-        <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} />
-      </mesh> */}
     </>
   );
 };
