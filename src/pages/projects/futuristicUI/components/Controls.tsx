@@ -3,7 +3,7 @@ import { useControls } from "leva";
 
 export const Controls = () => {
   const [controls, _set] = useControls("Obitcontrols", () => ({
-    enable: true,
+    enable: false,
   }));
 
   return <OrbitControls enabled={controls.enable} />;
