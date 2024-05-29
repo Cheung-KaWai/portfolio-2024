@@ -1,9 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "@pages/Home";
-import { ParticleMorphing } from "@pages/lab/ParticleMorphing";
+import { ParticleMorphing } from "@pages/lab/particleMorphing/ParticleMorphing";
 import { Blogs } from "@pages/blog/Blogs";
 import { Layout } from "@components/Layout";
 import { FuturisticUI } from "@pages/projects/futuristicUI/FuturisticUI";
+import { ImageShader } from "@pages/lab/imageShader/ImageShader";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -19,8 +20,14 @@ export const Routing = () => {
           children: [{ path: "futuristic_ui", element: <FuturisticUI /> }],
         },
         {
-          path: "lab/particle_morphing",
-          element: <ParticleMorphing />,
+          path: "lab",
+          children: [
+            { path: "particle_morphing", element: <ParticleMorphing /> },
+            {
+              path: "imageShader",
+              element: <ImageShader />,
+            },
+          ],
         },
         {
           path: "blogs",

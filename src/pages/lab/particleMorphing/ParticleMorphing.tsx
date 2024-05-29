@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
@@ -144,6 +145,7 @@ const useDebug = (morph: (index: number) => void) => {
         sphere: 1,
         torus: 2,
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onChange: (value: number, _: string, options: any) => {
         if (!options.initial) {
           morph(value);
