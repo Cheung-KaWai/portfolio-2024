@@ -2,6 +2,10 @@ varying vec2 vUv;
 uniform float uProgress;
 uniform vec2 uPlaneAspect;
 uniform vec2 uViewport;
+uniform float uTime;
+uniform vec3 uMeshPosition;
+
+#include ../helpers/functions.glsl;
 
 
 void main(){
@@ -21,19 +25,21 @@ void main(){
 
   // Calculate the z-position of the plane relative to the camera position
   // This ensures that the plane is positioned correctly in front of the camera
-  float cameraToPlaneDistance = distanceToPlane - length(vec3(0.,0.,10.));
+
+  float cameraToPlaneDistance = distanceToPlane - length(vec3(0.,0.,cameraPosition.z - uMeshPosition.z));
 
   // Update the z-position of the plane
   newPosition.z = -cameraToPlaneDistance;
+
+
+  float animation =clamp(smoothstep(uProgress + 1.,uProgress,(uv.x + uv.y) + 1. ),0.,1.);
   
-  vec3 finalPosition = mix(position,newPosition, uProgress);
+  vec3 finalPosition = mix(position,newPosition,animation);
   vec4 modelPosition = modelMatrix * vec4(finalPosition, 1.);
-  // modelPosition.z = -10.;
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
   gl_Position = projectedPosition;
 
-  // vUv = mix(uv,uv / uPlaneAspect, uProgress);
   vUv = uv;
 }

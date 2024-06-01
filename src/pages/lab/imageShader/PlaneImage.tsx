@@ -3,7 +3,7 @@ import vertex from "@shaders/imageShader/vertex.glsl";
 import fragment from "@shaders/imageShader/fragment.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo } from "react";
-import { Uniform, Vector2 } from "three";
+import { Uniform, Vector2, Vector3 } from "three";
 import { useTexture } from "@react-three/drei";
 import { useControls } from "leva";
 
@@ -22,8 +22,11 @@ export const PlaneImage = () => {
     progress: {
       value: 0,
       min: 0,
-      max: 1,
+      max: 3,
       step: 0.01,
+    },
+    position: {
+      value: [0, 0, -3],
     },
   }));
 
@@ -32,18 +35,18 @@ export const PlaneImage = () => {
   useEffect(() => {
     uniforms.uPlaneAspect.value = planeArgs;
     uniforms.uProgress.value = arg.progress;
+    uniforms.uMeshPosition.value = new Vector3(arg.position[0], arg.position[1], arg.position[2]);
   }, [arg]);
 
   const uniforms = useMemo(
     () => ({
-      // 100 width 50 height aspect 2
-      // 300 width 50 height
       uViewport: new Uniform(new Vector2(viewport.width, viewport.height)),
       uImageResolution: new Uniform(new Vector2(1, 1)),
       uPlaneAspect: new Uniform(planeArgs),
       uTime: new Uniform(0),
       uProgress: new Uniform(0),
       uImage: new Uniform(tower),
+      uMeshPosition: new Uniform(new Vector3(arg.position[0], arg.position[1], arg.position[2])),
     }),
     []
   );
@@ -59,8 +62,8 @@ export const PlaneImage = () => {
   }, [tower]);
 
   return (
-    <mesh>
-      <planeGeometry args={[planeArgs.x, planeArgs.y]} />
+    <mesh position={arg.position}>
+      <planeGeometry args={[planeArgs.x, planeArgs.y, 128, 128]} />
       <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} />
     </mesh>
   );
