@@ -25,12 +25,12 @@ void main(){
 
   // Calculate the z-position of the plane relative to the camera position
   // This ensures that the plane is positioned correctly in front of the camera
-
   float cameraToPlaneDistance = distanceToPlane - length(vec3(0.,0.,cameraPosition.z - uMeshPosition.z));
 
   // Update the z-position of the plane
   newPosition.z = -cameraToPlaneDistance;
-
+  newPosition.x -= uMeshPosition.x;
+  newPosition.y -= uMeshPosition.y;
 
   float animation =clamp(smoothstep(uProgress + 1.,uProgress,(uv.x + uv.y) + 1. ),0.,1.);
   
