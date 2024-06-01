@@ -33,6 +33,7 @@ export const PlaneImage = () => {
   const planeArgs = new Vector2(arg.width, arg.width / (viewport.width / viewport.height));
 
   useEffect(() => {
+    uniforms.uViewport.value = new Vector2(viewport.width, viewport.height);
     uniforms.uPlaneAspect.value = planeArgs;
     uniforms.uProgress.value = arg.progress;
     uniforms.uMeshPosition.value = new Vector3(arg.position[0], arg.position[1], arg.position[2]);
