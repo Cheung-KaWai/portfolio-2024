@@ -4,7 +4,7 @@ import { PlaneImage } from "./PlaneImage";
 
 export const ImageShader = () => {
   return (
-    <Canvas>
+    <Canvas camera={{ fov: 50 }}>
       <PlaneImage />
       <PerspectiveCamera makeDefault position={[0, 0, 10]} />
     </Canvas>

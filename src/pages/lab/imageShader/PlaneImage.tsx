@@ -16,13 +16,7 @@ export const PlaneImage = () => {
     width: {
       value: 5,
       min: 1,
-      max: 10,
-      step: 1,
-    },
-    height: {
-      value: 3,
-      min: 1,
-      max: 10,
+      max: 20,
       step: 1,
     },
     progress: {
@@ -33,7 +27,7 @@ export const PlaneImage = () => {
     },
   }));
 
-  const planeArgs = new Vector2(arg.width, arg.height);
+  const planeArgs = new Vector2(arg.width, arg.width / (viewport.width / viewport.height));
 
   useEffect(() => {
     uniforms.uPlaneAspect.value = planeArgs;
@@ -42,6 +36,8 @@ export const PlaneImage = () => {
 
   const uniforms = useMemo(
     () => ({
+      // 100 width 50 height aspect 2
+      // 300 width 50 height
       uViewport: new Uniform(new Vector2(viewport.width, viewport.height)),
       uImageResolution: new Uniform(new Vector2(1, 1)),
       uPlaneAspect: new Uniform(planeArgs),
