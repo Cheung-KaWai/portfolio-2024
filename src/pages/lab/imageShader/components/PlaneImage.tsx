@@ -9,7 +9,7 @@ import { useControls } from "leva";
 import gsap from "gsap";
 
 export const PlaneImage = () => {
-  const tower = useTexture("/tower.png");
+  const tower = useTexture("/imageShader/tower.png");
   const { viewport } = useThree();
   const [expanded, setExpanded] = useState(false);
   const meshRef = useRef<Mesh>(null);

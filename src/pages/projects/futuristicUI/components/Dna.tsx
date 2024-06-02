@@ -26,7 +26,7 @@ type ParticleProps = {
 };
 
 export const Dna = () => {
-  const gltf = useGLTF("/dna.glb");
+  const gltf = useGLTF("/futuristicUI/dna.glb");
   // console.log(gltf);
 
   const { gl } = useThree();

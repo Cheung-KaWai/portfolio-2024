@@ -13,8 +13,8 @@ const defaultSettings = {
 };
 
 export const HumanParticles = () => {
-  const { scene } = useGLTF("/human.glb");
-  const pattern = useTexture("/pattern2.png");
+  const { scene } = useGLTF("/futuristicUI/human.glb");
+  const pattern = useTexture("/futuristicUI/pattern2.png");
   const { gl } = useThree();
   pattern.flipY = false;
 

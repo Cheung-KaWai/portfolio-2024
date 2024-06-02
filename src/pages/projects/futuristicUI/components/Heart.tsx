@@ -12,7 +12,7 @@ import { useControls } from "leva";
 import gsap from "gsap";
 
 export const Heart = () => {
-  const { scene } = useGLTF("/heart.glb");
+  const { scene } = useGLTF("/futuristicUI/heart.glb");
   const [_show, setShow] = useState(0);
 
   const [controls, _] = useControls("Heart", () => ({

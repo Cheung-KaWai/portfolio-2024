@@ -20,7 +20,7 @@ export const ParticleMorphing = () => {
 };
 
 const ParticleMorphingContent = () => {
-  const { scene } = useGLTF("/morphing.glb");
+  const { scene } = useGLTF("/particlesMorphing/morphing.glb");
 
   // debug
   const { controls, set } = useDebug(morph);

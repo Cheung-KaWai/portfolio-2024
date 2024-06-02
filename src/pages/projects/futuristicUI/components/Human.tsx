@@ -12,7 +12,7 @@ import gsap from "gsap";
 const defaultSetting = { holographicColor1: "#0ee4ff", holographicColor2: "#fff" };
 
 export const Human = () => {
-  const { scene } = useGLTF("/human.glb");
+  const { scene } = useGLTF("/futuristicUI/human.glb");
   const { clock } = useThree();
 
   const [controls, _set] = useControls("Human", () => ({
