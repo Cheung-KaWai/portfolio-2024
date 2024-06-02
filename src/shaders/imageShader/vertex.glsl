@@ -38,7 +38,8 @@ void main(){
   
   vec3 finalPosition = mix(position,newPosition,animation);
   vec4 modelPosition = modelMatrix * vec4(finalPosition, 1.);
-  modelPosition.z = sin(modelPosition.x * 2. + uTime*5.) * 0.15 * uHover;
+  // hover animation
+  modelPosition.z += sin(modelPosition.x * 2. + uTime*5.) * 0.15 * uHover;
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
