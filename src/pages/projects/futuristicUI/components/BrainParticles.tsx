@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect, useMemo, useRef } from "react";
 import { AdditiveBlending, BufferGeometry, CatmullRomCurve3, Color, Uniform } from "three";
-import vertex from "@shaders/futuristicUI/brain/particleVertex.glsl";
-import fragment from "@shaders/futuristicUI/brain/particleFragment.glsl";
+import vertex from "../shaders/brain/particleVertex.glsl";
+import fragment from "../shaders/brain/particleFragment.glsl";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 
@@ -13,8 +14,8 @@ type PointsProps = {
 };
 
 export const BrainParticles: FC<{ curves: Array<CatmullRomCurve3> }> = ({ curves }) => {
-  let density = 5;
-  let numberOfPoints = density * curves.length;
+  const density = 5;
+  const numberOfPoints = density * curves.length;
 
   const myPoints = useRef<Array<PointsProps>>([]);
   const brainGeo = useRef<BufferGeometry>(null);
@@ -36,7 +37,7 @@ export const BrainParticles: FC<{ curves: Array<CatmullRomCurve3> }> = ({ curves
   }, []);
 
   const positions = useMemo(() => {
-    let points = [];
+    const points = [];
     for (let i = 0; i < numberOfPoints; i++) {
       points.push(Math.random(), Math.random(), Math.random());
     }
@@ -45,7 +46,7 @@ export const BrainParticles: FC<{ curves: Array<CatmullRomCurve3> }> = ({ curves
   }, []);
 
   const randomSize = useMemo(() => {
-    let points = [];
+    const points = [];
     for (let i = 0; i < numberOfPoints; i++) {
       points.push(Math.random() + 0.1);
     }
@@ -68,12 +69,12 @@ export const BrainParticles: FC<{ curves: Array<CatmullRomCurve3> }> = ({ curves
 
   useFrame(() => {
     if (brainGeo.current) {
-      let curPosition = brainGeo.current.attributes.position.array;
+      const curPosition = brainGeo.current.attributes.position.array;
       for (let i = 0; i < myPoints.current.length; i++) {
         myPoints.current[i].curPosition += myPoints.current[i].speed;
         myPoints.current[i].curPosition = myPoints.current[i].curPosition % 1;
 
-        let curPoint = myPoints.current[i].curve.getPointAt(myPoints.current[i].curPosition);
+        const curPoint = myPoints.current[i].curve.getPointAt(myPoints.current[i].curPosition);
 
         curPosition[i * 3] = curPoint.x;
         curPosition[i * 3 + 1] = curPoint.y;

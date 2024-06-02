@@ -1,12 +1,11 @@
-import vertex from "@shaders/futuristicUI/brain/infoVertex.glsl";
-import fragment from "@shaders/futuristicUI/brain/infoFragment.glsl";
+/* eslint-disable react-hooks/exhaustive-deps */
+import vertex from "../shaders/brain/infoVertex.glsl";
+import fragment from "../shaders/brain/infoFragment.glsl";
 import { AdditiveBlending, Color, Uniform } from "three";
 import { useControls } from "leva";
 import { useEffect, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
-// import { Html } from "@react-three/drei";
-// import styled from "styled-components";
 
 export const BrainInfo = () => {
   const [controls, _] = useControls("Brain", () => ({
@@ -47,9 +46,6 @@ export const BrainInfo = () => {
 
   return (
     <>
-      {/* <Html position={[-5.5, 2.3, 0.5]} transform rotation={[0, 0, Math.PI / 4.35]}>
-        <Label $opacity={1}>&nbsp;cerebrum&nbsp;</Label>
-      </Html> */}
       <mesh position={[-4.15, 1.02, 0.5]}>
         <planeGeometry args={[3.6, 3.2]} />
         <shaderMaterial vertexShader={vertex} fragmentShader={fragment} transparent={false} depthWrite={false} blending={AdditiveBlending} uniforms={uniforms} />
@@ -57,12 +53,3 @@ export const BrainInfo = () => {
     </>
   );
 };
-
-// const Label = styled.p<{ $opacity: number }>`
-//   text-transform: uppercase;
-//   display: inline-block;
-//   white-space: nowrap;
-//   font-size: 0.8rem;
-//   opacity: ${(props) => props.$opacity};
-//   transition: opacity 0.3s ease-out;
-// `;

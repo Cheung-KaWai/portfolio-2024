@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useGLTF } from "@react-three/drei";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { AdditiveBlending, BufferGeometry, Color, DoubleSide, Float32BufferAttribute, LineBasicMaterial, Mesh, ShaderMaterial, Uniform, Vector3 } from "three";
-import fragment from "@shaders/futuristicUI/human/fragment.glsl";
-import vertex from "@shaders/futuristicUI/human/vertex.glsl";
+import fragment from "../shaders/human/fragment.glsl";
+import vertex from "../shaders/human/vertex.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 import { MeshSurfaceSampler } from "three/examples/jsm/Addons.js";
@@ -79,13 +80,14 @@ export const Human = () => {
   });
 
   useLayoutEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const skellet: any = scene.children[0];
     if (skellet) skellet.material = shaderMaterial;
   }, [scene]);
 
   return (
     <>
-      {/* @ts-ignore */}
+      {/* @ts-expect-error ignore type warning*/}
       <line geometry={lineProps.geometry} material={lineProps.lineMaterial} renderOrder={-1} />
       <primitive object={scene} />
     </>

@@ -3,7 +3,7 @@ uniform float uTime;
 uniform float uShow;
 uniform vec3 uBorderColor;
 
-#include ../../helpers/functions.glsl
+#include /src/shaders/helpers/functions.glsl;
 
 void main(){
 

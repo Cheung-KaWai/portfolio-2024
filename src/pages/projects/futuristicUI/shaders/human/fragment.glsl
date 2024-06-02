@@ -6,7 +6,7 @@ uniform vec3 uHolographicColor1;
 uniform float uTime;
 uniform float uProgress;
 
-#include ../../helpers/functions.glsl
+#include /src/shaders/helpers/functions.glsl;
 
 void main(){
   // normal

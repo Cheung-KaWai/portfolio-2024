@@ -1,14 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { AdditiveBlending, Color, DoubleSide, ShaderMaterial, Uniform } from "three";
 
-import vertex from "@shaders/futuristicUI/heart/vertex.glsl";
-import fragment from "@shaders/futuristicUI/heart/fragment.glsl";
-import vertex2 from "@shaders/futuristicUI/heart/borderVertex.glsl";
-import fragment2 from "@shaders/futuristicUI/heart/borderFragment.glsl";
+import vertex from "../shaders/heart/vertex.glsl";
+import fragment from "../shaders/heart/fragment.glsl";
+import vertex2 from "../shaders/heart/borderVertex.glsl";
+import fragment2 from "../shaders/heart/borderFragment.glsl";
 import { useControls } from "leva";
-// import styled from "styled-components";
 import gsap from "gsap";
 
 export const Heart = () => {
@@ -52,7 +52,7 @@ export const Heart = () => {
 
   useLayoutEffect(() => {
     if (scene.children[0]) {
-      // @ts-ignore
+      // @ts-expect-error ignore error
       scene.children[0].material = material;
     }
 
@@ -79,9 +79,6 @@ export const Heart = () => {
   return (
     <>
       <primitive object={scene} scale={4.7} position={[3, -6.75, -2.2]} />
-      {/* <Html transform position={[4.23, 0.1, 0.5]}>
-        <Label $opacity={show}>&nbsp;cor&nbsp;</Label>
-      </Html> */}
       <mesh position={[4.23, -1.3, 0.5]}>
         <planeGeometry args={[3.5, 3.5]} />
         <shaderMaterial vertexShader={vertex2} fragmentShader={fragment2} transparent={true} uniforms={uniforms} />
@@ -89,12 +86,3 @@ export const Heart = () => {
     </>
   );
 };
-
-// const Label: any = styled.p<{ $opacity: number }>`
-//   text-transform: uppercase;
-//   display: inline-block;
-//   white-space: nowrap;
-//   font-size: 0.8rem;
-//   opacity: ${(props) => props.$opacity};
-//   transition: opacity 0.3s ease-out;
-// `;

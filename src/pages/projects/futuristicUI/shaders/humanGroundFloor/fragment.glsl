@@ -4,7 +4,7 @@ uniform vec3 uCircleColor1;
 uniform vec3 uCircleColor2;
 uniform float uProgress;
 
-#include ../../helpers/functions.glsl;
+#include /src/shaders/helpers/functions.glsl;
 
 
 void main(){

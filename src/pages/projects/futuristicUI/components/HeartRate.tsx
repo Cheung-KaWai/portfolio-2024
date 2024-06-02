@@ -1,12 +1,11 @@
-import vertex from "@shaders/futuristicUI/heartRate/vertex.glsl";
-import fragemt from "@shaders/futuristicUI/heartRate/fragment.glsl";
+/* eslint-disable react-hooks/exhaustive-deps */
+import vertex from "../shaders/heartRate/vertex.glsl";
+import fragemt from "../shaders/heartRate/fragment.glsl";
 import { useEffect, useMemo, useState } from "react";
 import { Color, Uniform, Vector2 } from "three";
 import { useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
 import gsap from "gsap";
-// import { Html } from "@react-three/drei";
-// import styled from "styled-components";
 
 export const HeartRate = () => {
   const [_show, setShow] = useState(0);
@@ -65,16 +64,6 @@ export const HeartRate = () => {
 
   return (
     <group position={[0.25, -0.1, 0]}>
-      {/* <Html position={[2.59, 3.0, 0.5]} transform>
-        <Label $opacity={show} ref={labelRef}>
-          &nbsp;pulsatio&nbsp;
-        </Label>
-      </Html>
-      <Html position={[5.595, 3, 0.5]} transform>
-        <Label $opacity={show} ref={labelRef}>
-          &nbsp;60&nbsp;
-        </Label>
-      </Html> */}
       <mesh position={[3.975, 1.8, 0.5]}>
         <planeGeometry args={[3.5, 2]} />
         <shaderMaterial vertexShader={vertex} fragmentShader={fragemt} uniforms={uniforms} transparent={true} />
@@ -82,12 +71,3 @@ export const HeartRate = () => {
     </group>
   );
 };
-
-// const Label = styled.p<{ $opacity: number }>`
-//   text-transform: uppercase;
-//   display: inline-block;
-//   white-space: nowrap;
-//   font-size: 0.8rem;
-//   opacity: ${(props) => props.$opacity};
-//   transition: opacity 0.3s ease-out;
-// `;

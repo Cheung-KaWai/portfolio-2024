@@ -2,7 +2,7 @@ varying vec2 vUv;
 uniform float uTime;
 uniform float uShow;
 uniform vec3 uBrainColor;
-#include ../../helpers/functions.glsl
+#include /src/shaders/helpers/functions.glsl;
 
 void main(){
   float progress = smoothstep(-1.,1.,sin(vUv.x*8. + uTime * 2.));

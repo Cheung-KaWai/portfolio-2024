@@ -3,7 +3,7 @@ uniform float uTime;
 uniform float uShow;
 uniform vec3 uColor;
 
-#include ../../helpers/functions.glsl
+#include /src/shaders/helpers/functions.glsl;
 
 void main(){
   float circle = distance(gl_PointCoord, vec2(0.5));

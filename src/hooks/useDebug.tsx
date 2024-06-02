@@ -10,6 +10,7 @@ export const useDebug = () => {
       // Check if CMD (Meta) key and 'D' key are pressed simultaneously or windows equivalent
       if ((event.metaKey && event.key === "d") || (event.ctrlKey && event.key === "d")) {
         update({ showDebug: !showDebug });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         showDebug = !showDebug;
       }
     };

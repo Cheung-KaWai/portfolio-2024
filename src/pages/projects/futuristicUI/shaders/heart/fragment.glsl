@@ -8,7 +8,7 @@ uniform float uFresnelPower;
 uniform float uFresnelAmount;
 uniform float uProgress;
 
-#include ../../helpers/functions.glsl
+#include /src/shaders/helpers/functions.glsl;
 
 
 void main(){
