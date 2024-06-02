@@ -6,6 +6,7 @@ import { useEffect, useMemo } from "react";
 import { Uniform, Vector2, Vector3 } from "three";
 import { useTexture } from "@react-three/drei";
 import { useControls } from "leva";
+import gsap from "gsap";
 
 export const PlaneImage = () => {
   const tower = useTexture("/tower.png");
@@ -48,6 +49,7 @@ export const PlaneImage = () => {
       uProgress: new Uniform(0),
       uImage: new Uniform(tower),
       uMeshPosition: new Uniform(new Vector3(arg.position[0], arg.position[1], arg.position[2])),
+      uHover: new Uniform(0),
     }),
     []
   );
@@ -63,7 +65,15 @@ export const PlaneImage = () => {
   }, [tower]);
 
   return (
-    <mesh position={arg.position}>
+    <mesh
+      position={arg.position}
+      onPointerEnter={() => {
+        gsap.to(uniforms.uHover, { value: 1, duration: 0.5 });
+      }}
+      onPointerLeave={() => {
+        gsap.to(uniforms.uHover, { value: 0, duration: 0.5 });
+      }}
+    >
       <planeGeometry args={[planeArgs.x, planeArgs.y, 128, 128]} />
       <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} />
     </mesh>
