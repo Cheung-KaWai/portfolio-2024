@@ -74,7 +74,7 @@ export const PlaneImage = () => {
       onPointerLeave={() => {
         gsap.to(uniforms.uHover, { value: 0, duration: 0.5 });
       }}
-      onClick={() => {
+      onPointerDown={() => {
         gsap.to(uniforms.uHover, { value: 0, duration: 0.5 });
         gsap.to(uniforms.uProgress, { value: expanded ? 0 : 1, duration: 2 });
         setExpanded((prev) => !prev);
