@@ -1,4 +1,4 @@
-#include "../../helpers/functions.glsl";
+#include /src/shaders/helpers/functions.glsl;
 
 varying vec2 vUv;
 uniform vec2 uResolution;

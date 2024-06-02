@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { AdditiveBlending, BufferGeometry, Color, Float32BufferAttribute, Mesh, ShaderMaterial, Uniform, Vector2, Vector3 } from "three";
-import vertex from "@shaders/futuristicUI/humanParticles/vertex.glsl";
-import fragment from "@shaders/futuristicUI/humanParticles/fragment.glsl";
+import vertex from "../shaders/humanParticles/vertex.glsl";
+import fragment from "../shaders/humanParticles/fragment.glsl";
 import { useGLTF, useTexture } from "@react-three/drei";
 import gsap from "gsap";
 import { MeshSurfaceSampler } from "three/examples/jsm/Addons.js";
@@ -12,8 +13,8 @@ const defaultSettings = {
 };
 
 export const HumanParticles = () => {
-  const { scene } = useGLTF("/human.glb");
-  const pattern = useTexture("/pattern2.png");
+  const { scene } = useGLTF("/futuristicUI/human.glb");
+  const pattern = useTexture("/futuristicUI/pattern2.png");
   const { gl } = useThree();
   pattern.flipY = false;
 

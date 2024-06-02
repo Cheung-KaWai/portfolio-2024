@@ -1,4 +1,4 @@
-#include ../helpers/functions.glsl
+#include /src/shaders/helpers/functions.glsl
 
 attribute vec3 aPositionTarget;
 attribute float aPointSize;

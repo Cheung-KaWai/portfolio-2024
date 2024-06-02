@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, Mesh, ShaderMaterial, Texture, Uniform, Vector2 } from "three";
 import { GPUComputationRenderer, Variable } from "three/examples/jsm/Addons.js";
-import gpgpuParticlesShader from "@shaders/futuristicUI/gpgpu/particles.glsl";
-import vertex from "@shaders/futuristicUI/gpgpu/vertex.glsl";
-import fragment from "@shaders/futuristicUI/gpgpu/fragment.glsl";
+import gpgpuParticlesShader from "../shaders/gpgpu/particles.glsl";
+import vertex from "../shaders/gpgpu/vertex.glsl";
+import fragment from "../shaders/gpgpu/fragment.glsl";
 import { useGLTF } from "@react-three/drei";
 import gsap from "gsap";
 
@@ -25,7 +26,7 @@ type ParticleProps = {
 };
 
 export const Dna = () => {
-  const gltf = useGLTF("/dna.glb");
+  const gltf = useGLTF("/futuristicUI/dna.glb");
   // console.log(gltf);
 
   const { gl } = useThree();

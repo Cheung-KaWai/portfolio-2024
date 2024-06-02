@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { Home } from "@pages/Home";
 import { ParticleMorphing } from "@pages/lab/particleMorphing/ParticleMorphing";
 import { Blogs } from "@pages/blog/Blogs";
@@ -12,19 +12,23 @@ export const Routing = () => {
       element: <Layout />,
       children: [
         {
+          index: true, // This makes the redirect route the default child route
+          element: <Navigate to="/home" replace />,
+        },
+        {
           path: "home",
           element: <Home />,
         },
         {
           path: "project/",
-          children: [{ path: "futuristic_ui", element: <FuturisticUI /> }],
+          children: [{ path: "futuristic-ui", element: <FuturisticUI /> }],
         },
         {
           path: "lab",
           children: [
-            { path: "particle_morphing", element: <ParticleMorphing /> },
+            { path: "particles-morphing", element: <ParticleMorphing /> },
             {
-              path: "imageShader",
+              path: "image-shader",
               element: <ImageShader />,
             },
           ],

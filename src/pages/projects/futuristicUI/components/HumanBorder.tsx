@@ -1,5 +1,6 @@
-import vertex from "@shaders/futuristicUI/human/borderVertex.glsl";
-import fragment from "@shaders/futuristicUI/human/borderFragment.glsl";
+/* eslint-disable react-hooks/exhaustive-deps */
+import vertex from "../shaders/human/borderVertex.glsl";
+import fragment from "../shaders/human/borderFragment.glsl";
 import { AdditiveBlending, Color, Uniform } from "three";
 import { useControls } from "leva";
 import { useEffect, useMemo } from "react";

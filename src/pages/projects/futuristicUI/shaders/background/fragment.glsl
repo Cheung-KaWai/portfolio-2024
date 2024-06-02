@@ -1,4 +1,4 @@
-#include ../../helpers/functions.glsl;
+#include /src/shaders/helpers/functions.glsl;
 #include helpers.glsl;
 
 varying vec2 vUv;

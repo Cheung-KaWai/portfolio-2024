@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AdditiveBlending, CatmullRomCurve3, Color, DoubleSide, Group, Uniform, Vector3 } from "three";
 import { data } from "../data/data";
 import { FC, useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-
-import vertex from "@shaders/futuristicUI/brain/vertex.glsl";
-import fragment from "@shaders/futuristicUI/brain/fragment.glsl";
+import vertex from "../shaders/brain/vertex.glsl";
+import fragment from "../shaders/brain/fragment.glsl";
 import { useControls } from "leva";
 import { BrainParticles } from "./BrainParticles";
 import gsap from "gsap";

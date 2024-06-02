@@ -1,4 +1,4 @@
-#include ../../helpers/functions.glsl;
+#include /src/shaders/helpers/functions.glsl;
 
 uniform float uSize;
 uniform vec2 uResolution;

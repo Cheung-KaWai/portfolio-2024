@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useThree } from "@react-three/fiber";
-import fragmentShader from "@shaders/futuristicUI/background/fragment.glsl";
-import vertexShader from "@shaders/futuristicUI/background/vertex.glsl";
+import fragmentShader from "../shaders/background/fragment.glsl";
+import vertexShader from "../shaders/background/vertex.glsl";
 import { useControls } from "leva";
 import { useEffect, useMemo, useRef } from "react";
 import { Color, Mesh, Uniform, Vector2 } from "three";

@@ -1,5 +1,6 @@
-import vertex from "@shaders/futuristicUI/humanGroundFloor/vertex.glsl";
-import fragment from "@shaders/futuristicUI/humanGroundFloor/fragment.glsl";
+/* eslint-disable react-hooks/exhaustive-deps */
+import vertex from "../shaders/humanGroundFloor/vertex.glsl";
+import fragment from "../shaders/humanGroundFloor/fragment.glsl";
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { AdditiveBlending, Color, DoubleSide, Mesh, Uniform, Vector2 } from "three";
@@ -56,7 +57,6 @@ export const HumanGroundFloor = () => {
 
   return (
     <mesh position={[0, -1.5, 1.7]} rotation-x={-Math.PI / 2}>
-      {/* <mesh position={[0, 0, 3]} ref={planeRef}> */}
       <planeGeometry args={[3, 3]} />
       <shaderMaterial vertexShader={vertex} fragmentShader={fragment} transparent={true} uniforms={uniforms} blending={AdditiveBlending} side={DoubleSide} depthWrite={false} />
     </mesh>

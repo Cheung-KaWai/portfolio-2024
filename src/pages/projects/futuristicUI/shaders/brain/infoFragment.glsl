@@ -4,7 +4,7 @@ uniform float uShow;
 uniform vec3 uBorderColor;
 uniform vec3 uDotsColor;
 uniform vec3 uBackgroundColor;
-#include ../../helpers/functions.glsl
+#include /src/shaders/helpers/functions.glsl;
 
 
 float sdCircle( vec2 p, float r )

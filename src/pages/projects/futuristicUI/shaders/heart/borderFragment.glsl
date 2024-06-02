@@ -4,7 +4,7 @@ uniform vec3 uBorderColor2;
 uniform float uTime;
 uniform float uShow;
 
-#include ../../helpers/functions.glsl;
+#include /src/shaders/helpers/functions.glsl;
 
 void main(){
   vec2 uv = vUv -0.5;

@@ -3,8 +3,8 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, Float32BufferAttribute, InterleavedBufferAttribute, Mesh, Points, ShaderMaterial, Uniform } from "three";
-import vertex from "@shaders/morphing/vertex.glsl";
-import fragment from "@shaders/morphing/fragment.glsl";
+import vertex from "./shaders/vertex.glsl";
+import fragment from "./shaders/fragment.glsl";
 import { useControls } from "leva";
 import gsap from "gsap";
 import { Performance } from "@components/Performance";
@@ -20,7 +20,7 @@ export const ParticleMorphing = () => {
 };
 
 const ParticleMorphingContent = () => {
-  const { scene } = useGLTF("/morphing.glb");
+  const { scene } = useGLTF("/particlesMorphing/morphing.glb");
 
   // debug
   const { controls, set } = useDebug(morph);
