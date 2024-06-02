@@ -1,0 +1,26 @@
+{
+  "lab": {
+    "name": "Lab experiments",
+    "baseRoute": "lab",
+    "data": [
+      {
+        "name": "Image shader",
+        "route": "image-shader"
+      },
+      {
+        "name": "Particles morphing",
+        "route": "particles-morphing"
+      }
+    ]
+  },
+  "projects": {
+    "name": "Projects",
+    "baseRoute": "project",
+    "data": [
+      {
+        "name": "Futuristic UI",
+        "route": "futuristic-ui"
+      }
+    ]
+  }
+}
