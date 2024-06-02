@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import vertex from "@shaders/imageShader/vertex.glsl";
-import fragment from "@shaders/imageShader/fragment.glsl";
+import vertex from "../shaders/vertex.glsl";
+import fragment from "../shaders/fragment.glsl";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useState } from "react";
-import { Uniform, Vector2, Vector3 } from "three";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Mesh, Uniform, Vector2, Vector3 } from "three";
 import { useTexture } from "@react-three/drei";
 import { useControls } from "leva";
 import gsap from "gsap";
@@ -12,6 +12,7 @@ export const PlaneImage = () => {
   const tower = useTexture("/tower.png");
   const { viewport } = useThree();
   const [expanded, setExpanded] = useState(false);
+  const meshRef = useRef<Mesh>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [arg, _set] = useControls(() => ({
@@ -68,6 +69,7 @@ export const PlaneImage = () => {
   return (
     <mesh
       position={arg.position}
+      ref={meshRef}
       onPointerEnter={() => {
         if (!expanded) gsap.to(uniforms.uHover, { value: 1, duration: 0.5 });
       }}
@@ -76,7 +78,13 @@ export const PlaneImage = () => {
       }}
       onPointerDown={() => {
         gsap.to(uniforms.uHover, { value: 0, duration: 0.5 });
-        gsap.to(uniforms.uProgress, { value: expanded ? 0 : 1, duration: 2 });
+        gsap.to(uniforms.uProgress, {
+          value: expanded ? 0 : 1,
+          duration: 2,
+          onComplete: () => {
+            if (meshRef.current) meshRef.current.updateMatrixWorld();
+          },
+        });
         setExpanded((prev) => !prev);
       }}
     >

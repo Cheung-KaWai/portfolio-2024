@@ -6,7 +6,7 @@ uniform float uTime;
 uniform vec3 uMeshPosition;
 uniform float uHover;
 
-#include ../helpers/functions.glsl;
+#include /src/shaders/helpers/functions.glsl;
 
 
 void main(){
