@@ -22,7 +22,7 @@ export const PlaneImage = () => {
     progress: {
       value: 0,
       min: 0,
-      max: 3,
+      max: 1,
       step: 0.01,
     },
     position: {

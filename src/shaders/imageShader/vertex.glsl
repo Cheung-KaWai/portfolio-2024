@@ -32,7 +32,7 @@ void main(){
   newPosition.x -= uMeshPosition.x;
   newPosition.y -= uMeshPosition.y;
 
-  float animation =clamp(smoothstep(uProgress + 1.,uProgress,(uv.x + uv.y) + 1. ),0.,1.);
+  float animation =clamp(smoothstep((uProgress*4.) + 2.,(uProgress*4.),(uv.x + uv.y) + 2.  ),0.,1.);
   
   vec3 finalPosition = mix(position,newPosition,animation);
   vec4 modelPosition = modelMatrix * vec4(finalPosition, 1.);
