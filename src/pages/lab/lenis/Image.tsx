@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { FC, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-export const Image: FC<{ src: string; offset: number }> = ({ src, offset }) => {
+export const Image: FC<{ src: string; offset: number; showDebug: boolean }> = ({ src, offset, showDebug }) => {
   const ref = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const Image: FC<{ src: string; offset: number }> = ({ src, offset }) => {
   }, []);
 
   return (
-    <MaskImage offset={offset}>
+    <MaskImage offset={offset} showDebug={showDebug}>
       <ImageContent src={src} ref={ref} />
     </MaskImage>
   );
@@ -30,10 +30,10 @@ const ImageContent = styled.img`
   aspect-ratio: 1;
 `;
 
-const MaskImage = styled.div<{ offset: number }>`
+const MaskImage = styled.div<{ offset: number; showDebug: boolean }>`
   margin-left: ${(props) => `${props.offset * 200}px`};
   height: 30rem;
-  /* border: 1px solid red; */
-  overflow: hidden;
+  border: 1px solid ${(props) => (props.showDebug ? "red" : "transparent")};
+  overflow: ${(props) => (props.showDebug ? "default" : "hidden")};
   width: fit-content;
 `;

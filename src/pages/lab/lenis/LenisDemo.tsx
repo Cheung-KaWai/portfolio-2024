@@ -3,11 +3,20 @@ import styled from "styled-components";
 import { Image } from "./Image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useControls } from "leva";
 
 gsap.registerPlugin(ScrollTrigger);
 const amountOfImages = new Array(5).fill(0);
 
+type DebugProps = {
+  showDebug: boolean;
+};
+
 export const LenisDemo = () => {
+  const [controls, _set] = useControls(() => ({
+    showDebug: false,
+  }));
+
   return (
     <ReactLenis
       root
@@ -16,9 +25,9 @@ export const LenisDemo = () => {
       }}
     >
       <Container>
-        <ScrollContainer>
+        <ScrollContainer showDebug={controls.showDebug}>
           {amountOfImages.map((_, index) => (
-            <Image src="/imageShader/tower.png" key={index} offset={index} />
+            <Image src="/imageShader/tower.png" key={index} offset={index} showDebug={controls.showDebug} />
           ))}
         </ScrollContainer>
       </Container>
@@ -36,12 +45,11 @@ const Container = styled.div`
   background-color: #111120;
 `;
 
-const ScrollContainer = styled.div`
+const ScrollContainer = styled.div<DebugProps>`
   width: auto;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid white; */
+  border: 1px solid ${(props) => (props.showDebug ? "white" : "transparent")};
   padding: 2rem;
   gap: 10rem;
-  /* overflow-y: scroll; */
 `;
