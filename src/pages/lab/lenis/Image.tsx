@@ -2,7 +2,13 @@ import gsap from "gsap";
 import { FC, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-export const Image: FC<{ src: string; offset: number; showDebug: boolean }> = ({ src, offset, showDebug }) => {
+type ImageProps = {
+  src: string;
+  offset: number;
+  showDebug: boolean;
+};
+
+export const Image: FC<ImageProps> = ({ src, offset, showDebug }) => {
   const ref = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -20,7 +26,7 @@ export const Image: FC<{ src: string; offset: number; showDebug: boolean }> = ({
 
   return (
     <MaskImage offset={offset} showDebug={showDebug}>
-      <ImageContent src={src} ref={ref} />
+      <ImageContent src={src} ref={ref} alt="smoothscroll" />
     </MaskImage>
   );
 };
