@@ -4,6 +4,10 @@
     "baseRoute": "lab",
     "data": [
       {
+        "name": "Lenis library",
+        "route": "lenis-demo"
+      },
+      {
         "name": "Image shader",
         "route": "image-shader"
       },
