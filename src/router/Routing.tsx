@@ -5,6 +5,7 @@ import { Blogs } from "@pages/blog/Blogs";
 import { Layout } from "@components/Layout";
 import { FuturisticUI } from "@pages/projects/futuristicUI/FuturisticUI";
 import { ImageShader } from "@pages/lab/imageShader/ImageShader";
+import { LenisDemo } from "@pages/lab/lenis/LenisDemo";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const Routing = () => {
             {
               path: "image-shader",
               element: <ImageShader />,
+            },
+            {
+              path: "lenis-demo",
+              element: <LenisDemo />,
             },
           ],
         },
