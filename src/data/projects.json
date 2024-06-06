@@ -22,6 +22,10 @@
     "baseRoute": "project",
     "data": [
       {
+        "name": "UV Viewer",
+        "route": "uv-viewer"
+      },
+      {
         "name": "Futuristic UI",
         "route": "futuristic-ui"
       }

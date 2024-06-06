@@ -6,6 +6,7 @@ import { Layout } from "@components/Layout";
 import { FuturisticUI } from "@pages/projects/futuristicUI/FuturisticUI";
 import { ImageShader } from "@pages/lab/imageShader/ImageShader";
 import { LenisDemo } from "@pages/lab/lenis/LenisDemo";
+import { UvVierwer } from "@pages/projects/uvViewer/UvViewer";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -22,7 +23,10 @@ export const Routing = () => {
         },
         {
           path: "project/",
-          children: [{ path: "futuristic-ui", element: <FuturisticUI /> }],
+          children: [
+            { path: "futuristic-ui", element: <FuturisticUI /> },
+            { path: "uv-viewer", element: <UvVierwer /> },
+          ],
         },
         {
           path: "lab",
