@@ -4,11 +4,12 @@ import { create } from "zustand";
 
 interface UvViewer {
   geo?: Mesh;
+  mesh: string;
   update: (options: Partial<UvViewer>) => void;
 }
 
 export const useUvViewer = create<UvViewer>((set) => ({
-  showDebug: null,
+  mesh: "box",
   update: (options) => set((state) => ({ ...state, ...options })),
 }));
 
