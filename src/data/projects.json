@@ -4,6 +4,10 @@
     "baseRoute": "lab",
     "data": [
       {
+        "name": "Grass",
+        "route": "grass"
+      },
+      {
         "name": "Lenis library",
         "route": "lenis-demo"
       },

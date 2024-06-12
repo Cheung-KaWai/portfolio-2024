@@ -7,6 +7,7 @@ import { FuturisticUI } from "@pages/projects/futuristicUI/FuturisticUI";
 import { ImageShader } from "@pages/lab/imageShader/ImageShader";
 import { LenisDemo } from "@pages/lab/lenis/LenisDemo";
 import { UvVierwer } from "@pages/projects/uvViewer/UvViewer";
+import { Grass } from "@pages/lab/grass/Grass";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -31,6 +32,7 @@ export const Routing = () => {
         {
           path: "lab",
           children: [
+            { path: "grass", element: <Grass /> },
             { path: "particles-morphing", element: <ParticleMorphing /> },
             {
               path: "image-shader",
