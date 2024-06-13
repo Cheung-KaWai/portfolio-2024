@@ -6,11 +6,11 @@ import fragment from "../shaders/grassblade/fragment.glsl";
 import { useGrass } from "../hooks/useGrass";
 
 export const GrassBlades = () => {
-  const { numbersOfGrass, segments, vertices, patchSize, width, height, indices } = useGrass();
+  const { numbersOfGrass, segments, patchSize, width, height, indices } = useGrass();
 
   const uniforms = useMemo(
     () => ({
-      grassParams: new Uniform(new Vector4(segments, vertices, width, height)),
+      grassParams: new Uniform(new Vector4(segments, patchSize, width, height)),
       time: new Uniform(0),
       resolution: new Uniform(new Vector2(1, 1)),
     }),
