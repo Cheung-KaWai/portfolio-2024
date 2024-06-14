@@ -4,6 +4,7 @@ import { FrontSide, Sphere, Uniform, Vector2, Vector3, Vector4 } from "three";
 import vertex from "../shaders/grassblade/vertex.glsl";
 import fragment from "../shaders/grassblade/fragment.glsl";
 import { useGrass } from "../hooks/useGrass";
+import { useFrame } from "@react-three/fiber";
 
 export const GrassBlades = () => {
   const { numbersOfGrass, segments, patchSize, width, height, indices } = useGrass();
@@ -16,6 +17,10 @@ export const GrassBlades = () => {
     }),
     []
   );
+
+  useFrame(({ clock }) => {
+    uniforms.time.value = clock.elapsedTime;
+  });
 
   return (
     <mesh>

@@ -4,6 +4,7 @@ varying vec4 vGrassData;
 uniform vec4 grassParams;
 varying vec3 vNormal;
 varying vec3 vWorldPosition;
+uniform float time;
 
 float inverseLerp(float v, float minValue, float maxValue) {
   return (v - minValue) / (maxValue - minValue);
@@ -97,6 +98,18 @@ vec3 bezierGrad(vec3 P0, vec3 P1, vec3 P2, vec3 P3, float t) {
          3.0 * t * t * (P3 - P2);
 }
 
+mat3 rotateAxis(vec3 axis, float angle) {
+  float s = sin(angle);
+  float c = cos(angle);
+  float oc = 1.0 - c;
+
+  return mat3(
+    oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,
+    oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,
+    oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c
+  );
+}
+
 const vec3 baseColor = vec3(0.1,0.4,0.04);
 const vec3 tipColor = vec3(0.5,0.7,0.3);
 
@@ -124,7 +137,6 @@ void main(){
   //Debug 
   // angle = float(gl_InstanceID) * 0.2;
 
-  mat3 grassMat = rotateY(angle);
 
   // get vertix id, if it's greater or equal than the amount grassVertices then it's the other side
   int vertFB_ID = gl_VertexID % (grassVertices * 2);
@@ -144,13 +156,19 @@ void main(){
   float y = heightPercent * height;
   float z = 0.0;
 
-  
-  // bezier curve
-  float leanFactor = remap(hashVal.y, -1.,1.,0.,0.5);
+  float windStrength = noise(vec3(grassBladeWorldPos.xz *0.05, 0.) + time);
+  float windAngle = 0.;
+  vec3 windAxis = vec3(cos(windAngle),0., sin(windAngle));
+  float windLeanAngle = windStrength * 1.5 * heightPercent;
+  float randomLeanAnimation = noise(vec3(grassBladeWorldPos.xz, time * 4.)) * (windStrength * 0.5 + 0.125);
+  float leanFactor = remap(hashVal.y, -1.,1.,0.,0.5) + randomLeanAnimation;
+
+
+  mat3 grassMat =  rotateAxis(windAxis,windLeanAngle) * rotateY(angle);
 
   // Debug
   // leanFactor = 1.;
-
+ // bezier curve
   vec3 p1 = vec3(0.);
   vec3 p2 = vec3(0.,0.33,0.);
   vec3 p3 = vec3(0.,0.66,0.);
