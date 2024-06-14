@@ -109,12 +109,22 @@ void main(){
   vec2 hashedInstanceID = hash21(float(gl_InstanceID)) *2. -1.;
   vec3 grassOffset = vec3(hashedInstanceID.x,0.,hashedInstanceID.y) * grassPatchSize;
 
+
+  //Debug
+  grassOffset = vec3(float(gl_InstanceID) * 0.5 - 8.,0.,0.);
+
   //rotation
   const float PI = 3.14159;
   vec3 grassBladeWorldPos = (modelMatrix * vec4(grassOffset, 1.)).xyz;
   vec3 hashVal = hash(grassBladeWorldPos);
   float angle = remap(hashVal.x,-1.,1.,PI,-PI);
+
+  //Debug 
+  angle = float(gl_InstanceID) * 0.2;
+
   mat3 grassMat = rotateY(angle);
+
+
 
   // get vertix id, if it's greater or equal than the amount grassVertices then it's the other side
   int vertFB_ID = gl_VertexID % (grassVertices * 2);
@@ -137,15 +147,26 @@ void main(){
   
   // bezier curve
   float leanFactor = remap(hashVal.y, -1.,1.,0.,0.5);
+
+  // Debug
+  leanFactor = 1.;
+
   vec3 p1 = vec3(0.);
   vec3 p2 = vec3(0.,0.33,0.);
   vec3 p3 = vec3(0.,0.66,0.);
   vec3 p4 = vec3(0.,cos(leanFactor),sin(leanFactor));
   vec3 curve = bezier(p1,p2,p3,p4,heightPercent);
+
+  // calculate normal
+  vec3 curveGrad = bezierGrad(p1,p2,p3,p4,heightPercent);
+  mat2 curveRot90 = mat2(0.,1.,-1.,0.) * -zSide;
+
   y = curve.y * height;
   z = curve.z *height;
 
   vec3 grassLocalposition = grassMat * vec3(x,y,z) + grassOffset;
+  vec3 grassLocalNormal = grassMat * vec3(0.,curveRot90 * curveGrad.yz);
+
   vec4 modelPosition = modelMatrix * vec4(grassLocalposition,1.);
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
@@ -159,5 +180,6 @@ void main(){
   float noiseValue = noise(grassBladeWorldPos * 0.1 );
 
   vColor = mix(c1,c2,smoothstep(-1.,1.,noiseValue));
+  vColor = grassLocalNormal;
   vGrassData = vec4(x,0.,0.,0.);
 }
