@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 
 export const useGrass = () => {
-  const numbersOfGrass = 48;
+  const numbersOfGrass = 16 * 1024;
   const segments = 6;
   const vertices = (segments + 1) * 2; // each segment add 2 extra vertices
-  const patchSize = 5;
+  const patchSize = 25;
   const width = 0.25;
   const height = 2;
 

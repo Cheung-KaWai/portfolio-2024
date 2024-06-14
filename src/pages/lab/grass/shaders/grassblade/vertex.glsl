@@ -2,6 +2,8 @@ varying vec2 vUv;
 varying vec3 vColor;
 varying vec4 vGrassData;
 uniform vec4 grassParams;
+varying vec3 vNormal;
+varying vec3 vWorldPosition;
 
 float inverseLerp(float v, float minValue, float maxValue) {
   return (v - minValue) / (maxValue - minValue);
@@ -111,7 +113,7 @@ void main(){
 
 
   //Debug
-  grassOffset = vec3(float(gl_InstanceID) * 0.5 - 8.,0.,0.);
+  // grassOffset = vec3(float(gl_InstanceID) * 0.5 - 8.,0.,0.);
 
   //rotation
   const float PI = 3.14159;
@@ -120,11 +122,9 @@ void main(){
   float angle = remap(hashVal.x,-1.,1.,PI,-PI);
 
   //Debug 
-  angle = float(gl_InstanceID) * 0.2;
+  // angle = float(gl_InstanceID) * 0.2;
 
   mat3 grassMat = rotateY(angle);
-
-
 
   // get vertix id, if it's greater or equal than the amount grassVertices then it's the other side
   int vertFB_ID = gl_VertexID % (grassVertices * 2);
@@ -149,7 +149,7 @@ void main(){
   float leanFactor = remap(hashVal.y, -1.,1.,0.,0.5);
 
   // Debug
-  leanFactor = 1.;
+  // leanFactor = 1.;
 
   vec3 p1 = vec3(0.);
   vec3 p2 = vec3(0.,0.33,0.);
@@ -180,6 +180,8 @@ void main(){
   float noiseValue = noise(grassBladeWorldPos * 0.1 );
 
   vColor = mix(c1,c2,smoothstep(-1.,1.,noiseValue));
-  vColor = grassLocalNormal;
+  // vColor = grassLocalNormal;
   vGrassData = vec4(x,0.,0.,0.);
+  vNormal = normalize((modelMatrix * vec4(grassLocalNormal,0.)).xyz);
+  vWorldPosition = (modelMatrix * vec4(grassLocalposition,1.)).xyz;
 }
