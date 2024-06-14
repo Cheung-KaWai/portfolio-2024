@@ -1,4 +1,6 @@
 varying vec2 vUv;
+varying vec3 vColor;
+varying vec4 vGrassData;
 uniform vec4 grassParams;
 
 float inverseLerp(float v, float minValue, float maxValue) {
@@ -9,6 +11,26 @@ float remap(float v, float inMin, float inMax, float outMin, float outMax) {
   float t = inverseLerp(v, inMin, inMax);
   return mix(outMin, outMax, t);
 }
+
+uvec2 murmurHash21(uint src) {
+  const uint M = 0x5bd1e995u;
+  uvec2 h = uvec2(1190494759u, 2147483647u);
+  src *= M;
+  src ^= src>>24u;
+  src *= M;
+  h *= M;
+  h ^= src;
+  h ^= h>>13u;
+  h *= M;
+  h ^= h>>15u;
+  return h;
+}
+
+vec2 hash21(float src) {
+  uvec2 h = murmurHash21(floatBitsToUint(src));
+  return uintBitsToFloat(h & 0x007fffffu | 0x3f800000u) - 1.0;
+}
+
 
 
 vec3 hash( vec3 p ) 
@@ -43,6 +65,23 @@ mat3 rotateY(float theta) {
   );
 }
 
+float noise( in vec3 p )
+{
+  vec3 i = floor( p );
+  vec3 f = fract( p );
+	
+	vec3 u = f*f*(3.0-2.0*f);
+
+  return mix( mix( mix( dot( hash( i + vec3(0.0,0.0,0.0) ), f - vec3(0.0,0.0,0.0) ), 
+                        dot( hash( i + vec3(1.0,0.0,0.0) ), f - vec3(1.0,0.0,0.0) ), u.x),
+                   mix( dot( hash( i + vec3(0.0,1.0,0.0) ), f - vec3(0.0,1.0,0.0) ), 
+                        dot( hash( i + vec3(1.0,1.0,0.0) ), f - vec3(1.0,1.0,0.0) ), u.x), u.y),
+              mix( mix( dot( hash( i + vec3(0.0,0.0,1.0) ), f - vec3(0.0,0.0,1.0) ), 
+                        dot( hash( i + vec3(1.0,0.0,1.0) ), f - vec3(1.0,0.0,1.0) ), u.x),
+                   mix( dot( hash( i + vec3(0.0,1.0,1.0) ), f - vec3(0.0,1.0,1.0) ), 
+                        dot( hash( i + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) ), u.x), u.y), u.z );
+}
+
 vec3 bezier(vec3 P0, vec3 P1, vec3 P2, vec3 P3, float t) {
   return (1.0 - t) * (1.0 - t) * (1.0 - t) * P0 +
          3.0 * (1.0 - t) * (1.0 - t) * t * P1 +
@@ -56,6 +95,9 @@ vec3 bezierGrad(vec3 P0, vec3 P1, vec3 P2, vec3 P3, float t) {
          3.0 * t * t * (P3 - P2);
 }
 
+const vec3 baseColor = vec3(0.1,0.4,0.04);
+const vec3 tipColor = vec3(0.5,0.7,0.3);
+
 void main(){
   int grassSegments = int(grassParams.x);
   int grassVertices = (grassSegments + 1) * 2;
@@ -64,7 +106,7 @@ void main(){
   float grassHeight = grassParams.w;
   
   //figure out grass offset
-  vec2 hashedInstanceID = quickHash(float(gl_InstanceID)) *2. -1.;
+  vec2 hashedInstanceID = hash21(float(gl_InstanceID)) *2. -1.;
   vec3 grassOffset = vec3(hashedInstanceID.x,0.,hashedInstanceID.y) * grassPatchSize;
 
   //rotation
@@ -103,10 +145,6 @@ void main(){
   y = curve.y * height;
   z = curve.z *height;
 
-
- 
-
-
   vec3 grassLocalposition = grassMat * vec3(x,y,z) + grassOffset;
   vec4 modelPosition = modelMatrix * vec4(grassLocalposition,1.);
   vec4 viewPosition = viewMatrix * modelPosition;
@@ -115,4 +153,11 @@ void main(){
   gl_Position = projectedPosition;
 
   vUv = uv;
+  
+  vec3 c1 = mix(baseColor,tipColor,heightPercent);
+  vec3 c2 = mix(vec3(0.08,0.369,0.231),vec3(0.047,0.741,0.412),heightPercent);
+  float noiseValue = noise(grassBladeWorldPos * 0.1 );
+
+  vColor = mix(c1,c2,smoothstep(-1.,1.,noiseValue));
+  vGrassData = vec4(x,0.,0.,0.);
 }
