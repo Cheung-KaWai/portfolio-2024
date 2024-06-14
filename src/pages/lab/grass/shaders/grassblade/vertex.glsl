@@ -167,6 +167,11 @@ void main(){
   vec3 grassLocalposition = grassMat * vec3(x,y,z) + grassOffset;
   vec3 grassLocalNormal = grassMat * vec3(0.,curveRot90 * curveGrad.yz);
 
+  //blend normals further away to reduce noise
+  float distanceBlend = smoothstep(0.,10.,distance(cameraPosition,grassBladeWorldPos));
+  grassLocalNormal = mix(grassLocalNormal, vec3(0.,1.,0.),distanceBlend * 0.5);
+  grassLocalNormal = normalize(grassLocalNormal);
+
   vec4 modelPosition = modelMatrix * vec4(grassLocalposition,1.);
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
