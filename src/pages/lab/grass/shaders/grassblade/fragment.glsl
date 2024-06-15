@@ -34,9 +34,22 @@ vec3 lambertLight(vec3 normal, vec3 viewDir, vec3 lightDir, vec3 lightColour) {
   return lighting * lightColour;  
 }
 
+vec3 phongSpecular(vec3 normal, vec3 lightDir, vec3 viewDir) {
+  float dotNL = saturate(dot(normal, lightDir));
+  
+  vec3 r = normalize(reflect(-lightDir, normal));
+  float phongValue = max(0.0, dot(viewDir, r));
+  phongValue = pow(phongValue, 32.0);
+
+  vec3 specular = dotNL * vec3(phongValue);
+
+  return specular;
+}
+
 void main (){
   // depth to the grassblade
   float grassX = vGrassData.x;
+  float grassY = vGrassData.y;
 
   vec3 normal = normalize(vNormal);
   vec3 viewDir = normalize(cameraPosition -vWorldPosition);
@@ -52,10 +65,17 @@ void main (){
   vec3 lightColor = vec3(1.);
   vec3 diffuseLighting = lambertLight(normal,viewDir,lightDir,lightColor);
 
+  // specular 
+  vec3 specular = phongSpecular(normal, lightDir, viewDir);
+
+  // fake ao
+  float ao = remap(pow(grassY, 2.), 0.,1.,0.125,1.);
+
   vec3 lightning = diffuseLighting * 0.5 + ambientLighting * 0.5;
 
   vec3 baseColor = mix(vColor * 0.75, vColor, smoothstep(0.125, 0., abs(grassX)));
   vec3 color = baseColor * ambientLighting;
+  color *=ao;
   // color = lightning;
 
   gl_FragColor = vec4(color,1.);

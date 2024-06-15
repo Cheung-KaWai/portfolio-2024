@@ -6,7 +6,7 @@ export const Grass = () => {
   return (
     <Canvas>
       <GrassBlades />
-      <OrbitControls />
+      <OrbitControls object-position={[0, 10, 35]} />
     </Canvas>
   );
 };

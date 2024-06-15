@@ -34,6 +34,10 @@ vec2 hash21(float src) {
   return uintBitsToFloat(h & 0x007fffffu | 0x3f800000u) - 1.0;
 }
 
+float saturate(float x) {
+  return clamp(x, 0.0, 1.0);
+}
+
 
 
 vec3 hash( vec3 p ) 
@@ -157,9 +161,9 @@ void main(){
   float z = 0.0;
 
   float windStrength = noise(vec3(grassBladeWorldPos.xz *0.05, 0.) + time);
-  float windAngle = 0.;
+  float windAngle = 0.5;
   vec3 windAxis = vec3(cos(windAngle),0., sin(windAngle));
-  float windLeanAngle = windStrength * 1.5 * heightPercent;
+  float windLeanAngle = windStrength * 2.5 * heightPercent;
   float randomLeanAnimation = noise(vec3(grassBladeWorldPos.xz, time * 4.)) * (windStrength * 0.5 + 0.125);
   float leanFactor = remap(hashVal.y, -1.,1.,0.,0.5) + randomLeanAnimation;
 
@@ -185,6 +189,14 @@ void main(){
   vec3 grassLocalposition = grassMat * vec3(x,y,z) + grassOffset;
   vec3 grassLocalNormal = grassMat * vec3(0.,curveRot90 * curveGrad.yz);
 
+  //viewspace thicken
+  vec4 mvPosition = modelViewMatrix * vec4(grassLocalposition,1.);
+  vec3 viewDir = normalize(cameraPosition - grassBladeWorldPos);
+  vec3 grassFaceNormal = - (grassMat * vec3(0.,0.,-zSide));
+  float viewDotNormal = saturate(dot(grassFaceNormal, viewDir));
+  float viewSpaceThickenFactor = easeOut(1. - viewDotNormal,4.) * smoothstep(0.,0.2,viewDotNormal);
+  mvPosition.x += viewSpaceThickenFactor * (xSide -0.5) * width * 0.5 * -zSide;
+
   //blend normals further away to reduce noise
   float distanceBlend = smoothstep(0.,10.,distance(cameraPosition,grassBladeWorldPos));
   grassLocalNormal = mix(grassLocalNormal, vec3(0.,1.,0.),distanceBlend * 0.5);
@@ -192,7 +204,7 @@ void main(){
 
   vec4 modelPosition = modelMatrix * vec4(grassLocalposition,1.);
   vec4 viewPosition = viewMatrix * modelPosition;
-  vec4 projectedPosition = projectionMatrix * viewPosition;
+  vec4 projectedPosition = projectionMatrix * mvPosition;
 
   gl_Position = projectedPosition;
 
@@ -204,7 +216,7 @@ void main(){
 
   vColor = mix(c1,c2,smoothstep(-1.,1.,noiseValue));
   // vColor = grassLocalNormal;
-  vGrassData = vec4(x,0.,0.,0.);
+  vGrassData = vec4(x,heightPercent,0.,0.);
   vNormal = normalize((modelMatrix * vec4(grassLocalNormal,0.)).xyz);
   vWorldPosition = (modelMatrix * vec4(grassLocalposition,1.)).xyz;
 }
