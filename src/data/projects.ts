@@ -4,6 +4,10 @@ export const data = {
     baseRoute: "lab",
     data: [
       {
+        name: "42. Wobbly Sphere",
+        route: "42-wobbly-sphere",
+      },
+      {
         name: "Precedural Terrain",
         route: "procedural-terrain",
       },
