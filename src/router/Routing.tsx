@@ -8,6 +8,7 @@ import { ImageShader } from "@pages/lab/imageShader/ImageShader";
 import { LenisDemo } from "@pages/lab/lenis/LenisDemo";
 import { UvVierwer } from "@pages/projects/uvViewer/UvViewer";
 import { Grass } from "@pages/lab/grass/Grass";
+import { ProceduralTerrain } from "@pages/lab/proceduralTerrain/ProceduralTerrain";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -32,6 +33,7 @@ export const Routing = () => {
         {
           path: "lab",
           children: [
+            { path: "procedural-terrain", element: <ProceduralTerrain /> },
             { path: "grass", element: <Grass /> },
             { path: "particles-morphing", element: <ParticleMorphing /> },
             {
