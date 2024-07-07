@@ -10,6 +10,7 @@ import { UvVierwer } from "@pages/projects/uvViewer/UvViewer";
 import { Grass } from "@pages/lab/grass/Grass";
 import { ProceduralTerrain } from "@pages/lab/proceduralTerrain/ProceduralTerrain";
 import { WobblySphere } from "@pages/lab/wobblySphere/WobblySphere";
+import { MagicSummoningCircles } from "@pages/projects/3-magic-summoning-circles/MagicSummoningCircles";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -27,6 +28,7 @@ export const Routing = () => {
         {
           path: "project/",
           children: [
+            { path: "3-magic-summoning-circles", element: <MagicSummoningCircles /> },
             { path: "futuristic-ui", element: <FuturisticUI /> },
             { path: "uv-viewer", element: <UvVierwer /> },
           ],

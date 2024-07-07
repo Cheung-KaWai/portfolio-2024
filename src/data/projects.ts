@@ -30,6 +30,10 @@ export const data = {
     baseRoute: "project",
     data: [
       {
+        name: "3. Magic Summoning Circles",
+        route: "3-magic-summoning-circles",
+      },
+      {
         name: "UV Viewer",
         route: "uv-viewer",
       },
