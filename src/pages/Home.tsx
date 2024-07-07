@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import data from "@data/projects.json";
+import { Project } from "@customTypes/Data";
+import { data } from "@data/projects";
 
 export const Home = () => {
   return (
@@ -7,13 +8,13 @@ export const Home = () => {
       <Column>
         <div>
           <h2>{data.lab.name}</h2>
-          {data.lab.data.map((x) => (
+          {data.lab.data.map((x: Project) => (
             <Link href={`${data.lab.baseRoute}/${x.route}`}>{x.name}</Link>
           ))}
         </div>
         <div>
           <h2>{data.projects.name}</h2>
-          {data.projects.data.map((x) => (
+          {data.projects.data.map((x: Project) => (
             <Link href={`${data.projects.baseRoute}/${x.route}`}>{x.name}</Link>
           ))}
         </div>
