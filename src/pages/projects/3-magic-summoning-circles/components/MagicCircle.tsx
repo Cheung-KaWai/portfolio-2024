@@ -7,12 +7,16 @@ import { Color, Mesh, MeshBasicMaterial, Uniform } from "three";
 import { useControls } from "leva";
 import { useDebug } from "@hooks/useDebug";
 import ThreeCustomShaderMaterial from "three-custom-shader-material";
+import { useMagicData } from "../hooks/useMagicData";
 
 export const MagicCircle = () => {
   useDebug();
   const ref = useRef<Mesh>(null);
+  const { outerCirclePath, centerCiclePath, innerCirclePath } = useMagicData();
 
-  const water = useTexture("/3-magic-summoning-circles/water.png");
+  const outerImage = useTexture(outerCirclePath!);
+  const innerImage = useTexture(centerCiclePath!);
+  const centerImage = useTexture(innerCirclePath!);
 
   const controls = useControls({
     progess: {
@@ -43,7 +47,9 @@ export const MagicCircle = () => {
 
   const uniforms = useMemo(
     () => ({
-      uWater: new Uniform(water),
+      uOuterCircle: new Uniform(outerImage),
+      uInnerCircle: new Uniform(innerImage),
+      uCenterCircle: new Uniform(centerImage),
       uProgress: new Uniform(controls.progess),
     }),
     []

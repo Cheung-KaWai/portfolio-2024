@@ -9,9 +9,9 @@ interface MagicState {
 }
 
 export const useMagicStore = create<MagicState>((set) => ({
-  outerCircle: "",
-  innerCircle: "",
-  centerCircle: "",
+  outerCircle: "water",
+  innerCircle: "water",
+  centerCircle: "water",
   update: (options) => set((state) => ({ ...state, ...options })),
 }));
 
