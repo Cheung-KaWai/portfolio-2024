@@ -1,6 +1,6 @@
 varying vec2 vUv;
 uniform sampler2D uWater;
-uniform vec3 uColor;
+uniform float uProgress;
 
 void main(){
   vec2 uv = vUv;
@@ -9,7 +9,7 @@ void main(){
 
   float circle = 1. - water.r;
 
-  float alpha =water.a;
+  float alpha = water.a * uProgress;
 
   csm_FragColor.a = alpha;
 }

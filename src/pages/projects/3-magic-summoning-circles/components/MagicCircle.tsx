@@ -2,25 +2,25 @@
 import vertex from "../shaders/magic-circle/vertex.glsl";
 import fragment from "../shaders/magic-circle/fragment.glsl";
 import { useTexture } from "@react-three/drei";
-import { useEffect, useMemo } from "react";
-import { Color, MeshBasicMaterial, Uniform } from "three";
+import { useEffect, useMemo, useRef } from "react";
+import { Color, Mesh, MeshBasicMaterial, Uniform } from "three";
 import { useControls } from "leva";
 import { useDebug } from "@hooks/useDebug";
 import ThreeCustomShaderMaterial from "three-custom-shader-material";
 
 export const MagicCircle = () => {
   useDebug();
+  const ref = useRef<Mesh>(null);
+
   const water = useTexture("/3-magic-summoning-circles/water.png");
 
-  const uniforms = useMemo(
-    () => ({
-      uWater: new Uniform(water),
-      uColor: new Uniform(new Color("#1383a3")),
-    }),
-    []
-  );
-
   const controls = useControls({
+    progess: {
+      value: 1,
+      min: 0,
+      max: 1,
+      step: 0.01,
+    },
     r: {
       value: 1,
       min: 0,
@@ -41,18 +41,22 @@ export const MagicCircle = () => {
     },
   });
 
-  useEffect(() => {}, [controls]);
+  const uniforms = useMemo(
+    () => ({
+      uWater: new Uniform(water),
+      uProgress: new Uniform(controls.progess),
+    }),
+    []
+  );
+
+  useEffect(() => {
+    uniforms.uProgress.value = controls.progess;
+  }, [controls]);
 
   return (
-    <>
-      {/* <mesh>
-        <boxGeometry />
-        <meshBasicMaterial />
-      </mesh> */}
-      <mesh rotation-x={-Math.PI / 2}>
-        <planeGeometry args={[10, 10]} />
-        <ThreeCustomShaderMaterial baseMaterial={MeshBasicMaterial} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent silent color={new Color(controls.r, controls.g, controls.b)} />
-      </mesh>
-    </>
+    <mesh rotation-x={-Math.PI / 2} ref={ref}>
+      <planeGeometry args={[10, 10]} />
+      <ThreeCustomShaderMaterial baseMaterial={MeshBasicMaterial} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent silent color={new Color(controls.r, controls.g, controls.b)} />
+    </mesh>
   );
 };
