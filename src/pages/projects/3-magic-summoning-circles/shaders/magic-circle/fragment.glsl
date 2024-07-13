@@ -15,6 +15,7 @@ void main(){
   float alphaCircle = (outerCircle.a + innerCircle.a + centerCircle.a);
 
   float alpha = alphaCircle * uProgress;
+  alpha = smoothstep(0.,3.,alpha);
 
   csm_FragColor.a = alpha;
 }

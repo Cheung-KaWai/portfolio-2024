@@ -6,6 +6,7 @@ import { Crystal } from "./components/Crystal";
 import { Physics } from "@react-three/rapier";
 import { Character } from "./components/Character";
 import { Ground } from "./components/Ground";
+import { Perf } from "r3f-perf";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -21,6 +22,7 @@ export const MagicSummoningCircles = () => {
     <>
       <KeyboardControls map={keyboardMap}>
         <Canvas>
+          <Perf />
           <Effects />
           <Physics debug>
             <Crystal />

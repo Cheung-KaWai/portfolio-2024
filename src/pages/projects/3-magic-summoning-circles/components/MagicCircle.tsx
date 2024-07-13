@@ -77,7 +77,7 @@ export const MagicCircle = () => {
   return (
     <RigidBody type="fixed">
       <mesh rotation-x={-Math.PI / 2} ref={ref}>
-        <planeGeometry args={[10, 10]} />
+        <planeGeometry args={[20, 20]} />
         <ThreeCustomShaderMaterial baseMaterial={MeshBasicMaterial} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent silent color={new Color(controls.r, controls.g, controls.b)} />
       </mesh>
     </RigidBody>

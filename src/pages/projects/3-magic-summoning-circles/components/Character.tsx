@@ -29,6 +29,7 @@ const lerpAngle = (start: number, end: number, t: number) => {
 export const Character = () => {
   const walkSpeed = 8;
   const runSpeed = 8;
+  const jump = 4;
   const rotationSpeed = 0.02;
 
   const rb = useRef<any>(null);
@@ -81,7 +82,7 @@ export const Character = () => {
       }
 
       if (movement.y !== 0) {
-        vel.y = movement.y * speed;
+        vel.y = movement.y * jump;
       }
 
       if (character.current) {
@@ -95,7 +96,7 @@ export const Character = () => {
     }
 
     cameraPosition.current?.getWorldPosition(cameraWorldPosition.current);
-    camera.position.lerp(cameraWorldPosition.current, 0.1);
+    camera.position.lerp(new Vector3(cameraWorldPosition.current.x, 10, cameraWorldPosition.current.z), 0.1);
 
     if (cameraTarget.current) {
       cameraTarget.current?.getWorldPosition(cameraLookAtWorldPosition.current);
