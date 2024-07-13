@@ -5,6 +5,7 @@ import { Effects } from "./components/Effects";
 import { Crystal } from "./components/Crystal";
 import { Physics } from "@react-three/rapier";
 import { Character } from "./components/Character";
+import { Ground } from "./components/Ground";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -25,6 +26,7 @@ export const MagicSummoningCircles = () => {
             <Crystal />
             <MagicCircle />
             <Character />
+            <Ground />
           </Physics>
           <Environment preset="studio" />
         </Canvas>
