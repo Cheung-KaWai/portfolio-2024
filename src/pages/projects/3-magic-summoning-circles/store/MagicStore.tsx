@@ -11,7 +11,7 @@ interface MagicState {
 export const useMagicStore = create<MagicState>((set) => ({
   outerCircle: "water",
   innerCircle: "water",
-  centerCircle: "water",
+  centerCircle: "fire",
   update: (options) => set((state) => ({ ...state, ...options })),
 }));
 

@@ -1,4 +1,4 @@
-import { dataCircles } from "../data/data";
+import { dataCircles, combinations } from "../data/data";
 import { useMagicStore } from "../store/MagicStore";
 
 export const useMagicData = () => {
@@ -10,6 +10,7 @@ export const useMagicData = () => {
 
   const activate = centerCircle === outerCircle && outerCircle === innerCircle;
   const typeCircle = centerCircle;
+  const colors = combinations.find((x) => x.id === typeCircle)?.colors;
 
   return {
     centerCiclePath,
@@ -17,5 +18,6 @@ export const useMagicData = () => {
     innerCirclePath,
     activate,
     typeCircle,
+    colors,
   };
 };

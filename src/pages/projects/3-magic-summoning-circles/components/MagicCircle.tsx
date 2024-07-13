@@ -3,20 +3,22 @@ import vertex from "../shaders/magic-circle/vertex.glsl";
 import fragment from "../shaders/magic-circle/fragment.glsl";
 import { useTexture } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
-import { Color, Mesh, MeshBasicMaterial, Uniform } from "three";
+import { Color, Mesh, MeshBasicMaterial, MeshStandardMaterial, Uniform } from "three";
 import { useControls } from "leva";
 import { useDebug } from "@hooks/useDebug";
 import ThreeCustomShaderMaterial from "three-custom-shader-material";
 import { useMagicData } from "../hooks/useMagicData";
+import gsap from "gsap";
+import { RigidBody } from "@react-three/rapier";
 
 export const MagicCircle = () => {
   useDebug();
   const ref = useRef<Mesh>(null);
-  const { outerCirclePath, centerCiclePath, innerCirclePath } = useMagicData();
+  const { outerCirclePath, centerCiclePath, innerCirclePath, activate, colors } = useMagicData();
 
   const outerImage = useTexture(outerCirclePath!);
-  const innerImage = useTexture(centerCiclePath!);
-  const centerImage = useTexture(innerCirclePath!);
+  const innerImage = useTexture(innerCirclePath!);
+  const centerImage = useTexture(centerCiclePath!);
 
   const controls = useControls({
     progess: {
@@ -26,19 +28,19 @@ export const MagicCircle = () => {
       step: 0.01,
     },
     r: {
-      value: 1,
+      value: 2,
       min: 0,
       max: 20,
       step: 0.1,
     },
     g: {
-      value: 5,
+      value: 2,
       min: 0,
       max: 20,
       step: 0.1,
     },
     b: {
-      value: 10,
+      value: 2,
       min: 0,
       max: 20,
       step: 0.1,
@@ -56,13 +58,28 @@ export const MagicCircle = () => {
   );
 
   useEffect(() => {
-    uniforms.uProgress.value = controls.progess;
-  }, [controls]);
+    uniforms.uOuterCircle.value = outerImage;
+    uniforms.uInnerCircle.value = innerImage;
+    uniforms.uCenterCircle.value = centerImage;
+  }, [outerImage, innerImage, centerImage]);
+
+  useEffect(() => {
+    if (ref.current?.material) {
+      const material = ref.current.material as MeshStandardMaterial;
+      if (activate) {
+        gsap.to(material.color, { ...colors });
+      } else {
+        gsap.to(material.color, { r: 2, g: 2, b: 2 });
+      }
+    }
+  }, [activate]);
 
   return (
-    <mesh rotation-x={-Math.PI / 2} ref={ref}>
-      <planeGeometry args={[10, 10]} />
-      <ThreeCustomShaderMaterial baseMaterial={MeshBasicMaterial} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent silent color={new Color(controls.r, controls.g, controls.b)} />
-    </mesh>
+    <RigidBody type="fixed">
+      <mesh rotation-x={-Math.PI / 2} ref={ref}>
+        <planeGeometry args={[10, 10]} />
+        <ThreeCustomShaderMaterial baseMaterial={MeshBasicMaterial} vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms} transparent silent color={new Color(controls.r, controls.g, controls.b)} />
+      </mesh>
+    </RigidBody>
   );
 };
