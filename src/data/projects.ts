@@ -30,6 +30,10 @@ export const data = {
     baseRoute: "project",
     data: [
       {
+        name: "4. Table Configurator",
+        route: "4-table-configurator",
+      },
+      {
         name: "3. Magic Summoning Circles",
         route: "3-magic-summoning-circles",
       },

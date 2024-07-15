@@ -11,6 +11,7 @@ import { Grass } from "@pages/lab/grass/Grass";
 import { ProceduralTerrain } from "@pages/lab/proceduralTerrain/ProceduralTerrain";
 import { WobblySphere } from "@pages/lab/wobblySphere/WobblySphere";
 import { MagicSummoningCircles } from "@pages/projects/3-magic-summoning-circles/MagicSummoningCircles";
+import { TableConfigurator } from "@pages/projects/4-table-configurator/TableConfigurator";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -28,6 +29,7 @@ export const Routing = () => {
         {
           path: "project/",
           children: [
+            { path: "4-table-configurator", element: <TableConfigurator /> },
             { path: "3-magic-summoning-circles", element: <MagicSummoningCircles /> },
             { path: "futuristic-ui", element: <FuturisticUI /> },
             { path: "uv-viewer", element: <UvVierwer /> },

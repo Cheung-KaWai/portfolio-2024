@@ -7,7 +7,7 @@ interface GlobalState {
 }
 
 export const useGlobal = create<GlobalState>((set) => ({
-  showDebug: false,
+  showDebug: true,
   update: (options) => set((state) => ({ ...state, ...options })),
 }));
 
