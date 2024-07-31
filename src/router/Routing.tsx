@@ -13,6 +13,7 @@ import { WobblySphere } from "@pages/lab/wobblySphere/WobblySphere";
 import { MagicSummoningCircles } from "@pages/projects/3-magic-summoning-circles/MagicSummoningCircles";
 import { TableConfigurator } from "@pages/projects/4-table-configurator/TableConfigurator";
 import { AttributeVisualiser } from "@pages/projects/5-attributes-visualiser/AttributeVisualiser";
+import { ScrollImage } from "@pages/projects/scroll-image/ScrollImage";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -30,6 +31,7 @@ export const Routing = () => {
         {
           path: "project/",
           children: [
+            { path: "scroll-image", element: <ScrollImage /> },
             { path: "5-attributes-visualiser", element: <AttributeVisualiser /> },
             { path: "4-table-configurator", element: <TableConfigurator /> },
             { path: "3-magic-summoning-circles", element: <MagicSummoningCircles /> },
