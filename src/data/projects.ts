@@ -30,6 +30,10 @@ export const data = {
     baseRoute: "project",
     data: [
       {
+        name: "5. Attributes Visualiser",
+        route: "5-attributes-visualiser",
+      },
+      {
         name: "4. Table Configurator",
         route: "4-table-configurator",
       },

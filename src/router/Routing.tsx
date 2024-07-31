@@ -12,6 +12,7 @@ import { ProceduralTerrain } from "@pages/lab/proceduralTerrain/ProceduralTerrai
 import { WobblySphere } from "@pages/lab/wobblySphere/WobblySphere";
 import { MagicSummoningCircles } from "@pages/projects/3-magic-summoning-circles/MagicSummoningCircles";
 import { TableConfigurator } from "@pages/projects/4-table-configurator/TableConfigurator";
+import { AttributeVisualiser } from "@pages/projects/5-attributes-visualiser/AttributeVisualiser";
 export const Routing = () => {
   const router = createBrowserRouter([
     {
@@ -29,6 +30,7 @@ export const Routing = () => {
         {
           path: "project/",
           children: [
+            { path: "5-attributes-visualiser", element: <AttributeVisualiser /> },
             { path: "4-table-configurator", element: <TableConfigurator /> },
             { path: "3-magic-summoning-circles", element: <MagicSummoningCircles /> },
             { path: "futuristic-ui", element: <FuturisticUI /> },

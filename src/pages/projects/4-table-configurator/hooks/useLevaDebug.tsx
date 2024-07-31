@@ -3,7 +3,7 @@ import { useControls } from "leva";
 export const useLevaDebug = () => {
   const controls = useControls({
     progress: {
-      value: 0.5,
+      value: 1,
       min: 0,
       max: 1,
       step: 0.01,
@@ -12,7 +12,7 @@ export const useLevaDebug = () => {
       value: false,
     },
     depth: {
-      value: 0.3,
+      value: 0.03,
       min: 0,
       max: 1,
       step: 0.01,

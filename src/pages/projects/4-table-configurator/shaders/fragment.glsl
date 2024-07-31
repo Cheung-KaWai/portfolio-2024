@@ -1,7 +1,8 @@
 #define PI 3.14159265359
 
 varying vec2 vUv;
-varying vec3 uNormal;
+varying vec3 vNormal;
+varying vec3 vPosition;
 uniform float uProgress;
 uniform float uLength;
 uniform float uDepth;
@@ -23,18 +24,18 @@ void main(){
   uv = uv * REPEAT;
   
   // prevent stretch of textures on left and right side
-  if(uNormal.x == 1. || uNormal.x == -1.){
+  if(vNormal.x == 1. || vNormal.x == -1.){
     uv = rotate2d(-PI/2.) * uv; // rotate texture on left and right side
 
     // right side
-    if(uNormal.x == 1.){
+    if(vNormal.x == 1.){
       uv.x = uv.x * -1.; // mirror the texture
       uv.x = uv.x + uDepth + uProgress ; // make the texture on the right side extend from the back and not front and make it connect with front face
       uv.y = uv.y + uOffset;
     } 
 
     //left side
-    if(uNormal.x == -1.){
+    if(vNormal.x == -1.){
       uv.x = uv.x - uDepth - uProgress;; // make the texture on the left side extend from the back and not front and make it connect with front face
     }
   }
@@ -44,22 +45,28 @@ void main(){
   }
 
   // align top face with front face
-  if(uNormal.y == 1.){
+  if(vNormal.y == 1.){
     uv.y = uv.y + uDepth + 0.5;
   }
 
   // align bottom face with front face 
-  if(uNormal.y == -1.){
+  if(vNormal.y == -1.){
      uv.y = uv.y * -1.; // mirror the texture
      uv.y = uv.y - uDepth - 0.5;
   }
 
-  if(uNormal.z == -1.){
+  if(vNormal.z == -1.){
     uv.x = uv.x * -1.;
   }
 
 
   vec3 wood = texture2D(uTexture,uv).rgb;
+
+  // float percentage = vPosition.z / uDepth;
+
+  // if(percentage <= 0.5){
+  //   wood = vec3(1.,0.,0.);
+  // }
 
   gl_FragColor = vec4(wood,1.);
 }
