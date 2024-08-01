@@ -18,8 +18,8 @@ export const Scene = () => {
 
 const Container = styled.div`
   width: 100svw;
-  height: 100%;
-  position: absolute;
+  height: 100svh;
+  position: fixed;
   top: 0;
   left: 0;
 `;
