@@ -6,11 +6,12 @@ export const Grid: FC<PropsWithChildren> = ({ children }) => {
 };
 
 const GridContainer = styled.div`
+  position: relative;
   width: 100svw;
   min-height: 100svh;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 50svh 100px;
+  grid-auto-rows: 25svh 100px;
   padding: 5rem;
   gap: 1rem;
 `;
