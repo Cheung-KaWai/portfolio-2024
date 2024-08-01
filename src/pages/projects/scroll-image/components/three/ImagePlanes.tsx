@@ -5,6 +5,7 @@ import { useLenis } from "lenis/react";
 export const ImagePlanes = () => {
   const { meshes } = useImages();
   const [scrollY, setScrollY] = useState(0);
+  const [initPosition, _] = useState(window.scrollY);
 
   useLenis(({ scroll }) => {
     setScrollY(scroll);
@@ -14,7 +15,7 @@ export const ImagePlanes = () => {
     <>
       {meshes?.map((media, index) => {
         const plane = (
-          <mesh key={index} scale={[media.width, media.height, 1]} position={[media.left - window.innerWidth / 2 + media.width / 2, -media.top + window.innerHeight / 2 - media.height / 2 + scrollY, 0]}>
+          <mesh key={index} scale={[media.width, media.height, 1]} position={[media.left - window.innerWidth / 2 + media.width / 2, -media.top + window.innerHeight / 2 - media.height / 2 - initPosition + scrollY, 0]}>
             <planeGeometry args={[1, 1, 100, 100]} />
             <shaderMaterial />
           </mesh>
