@@ -1,7 +1,7 @@
 import ReactLenis from "lenis/react";
 import { Grid } from "./components/Grid";
-import { Images } from "./components/Images";
 import { Scene } from "./components/three/Scene";
+import { Images } from "./components/Images";
 
 export const ScrollImage = () => {
   return (
@@ -9,8 +9,8 @@ export const ScrollImage = () => {
       <ReactLenis root>
         <Grid>
           <Images />
-          <Scene />
         </Grid>
+        <Scene />
       </ReactLenis>
     </>
   );

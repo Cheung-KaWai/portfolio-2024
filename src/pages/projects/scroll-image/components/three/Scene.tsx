@@ -1,16 +1,14 @@
-import { Box } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
 import { Camera } from "./Camera.tsx";
-import { ImagePlanes } from "./ImagePlanes.tsx";
+import { PlaneImages } from "./PlaneImages/index.tsx";
 
 export const Scene = () => {
   return (
     <Container>
       <Canvas>
         <Camera />
-        <Box />
-        <ImagePlanes />
+        <PlaneImages />
       </Canvas>
     </Container>
   );

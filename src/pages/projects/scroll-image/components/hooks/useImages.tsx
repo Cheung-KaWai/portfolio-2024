@@ -6,15 +6,24 @@ export const useImages = () => {
 
   // get all html images
   useEffect(() => {
-    const media = [...document.querySelectorAll("[data-webgl-media]")];
+    const setiImageInfo = () => {
+      const media = [...document.querySelectorAll("[data-webgl-media]")];
 
-    const mediaStore = media.map((media, _) => {
-      const bounds = media.getBoundingClientRect();
-      return bounds;
-    });
+      const mediaStore = media.map((media, _) => {
+        const bounds = media.getBoundingClientRect();
+        return bounds;
+      });
 
-    setImages(media);
-    setMeshes(mediaStore);
+      setImages(media);
+      setMeshes(mediaStore);
+    };
+    setiImageInfo();
+
+    window.addEventListener("resize", setiImageInfo);
+
+    return () => {
+      window.removeEventListener("resize", setiImageInfo);
+    };
   }, []);
 
   return { images, meshes };
