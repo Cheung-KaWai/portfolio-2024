@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 
+interface ImageData extends DOMRect {
+  src: string;
+}
+
 export const useImages = () => {
-  const [images, setImages] = useState<Array<Element> | null>(null);
-  const [meshes, setMeshes] = useState<DOMRect[] | null>(null);
+  const [images, setImages] = useState<HTMLImageElement[] | null>(null);
+  const [meshes, setMeshes] = useState<ImageData[] | null>(null);
 
   // get all html images
   useEffect(() => {
@@ -10,11 +14,12 @@ export const useImages = () => {
       const media = [...document.querySelectorAll("[data-webgl-media]")];
 
       const mediaStore = media.map((media, _) => {
-        const bounds = media.getBoundingClientRect();
+        const bounds = media.getBoundingClientRect() as ImageData;
+        bounds.src = media.getAttribute("src")!;
         return bounds;
       });
 
-      setImages(media);
+      setImages(media as HTMLImageElement[]);
       setMeshes(mediaStore);
     };
     setiImageInfo();

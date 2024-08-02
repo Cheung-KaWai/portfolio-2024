@@ -28,6 +28,7 @@ const StyledImage = styled.img<ImageProps>`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
   grid-column: ${(props) => `${props.$gridColumnStart} / ${props.$gridColumnEnd}`};
   grid-row: ${(props) => `${props.$gridRowStart} / ${props.$gridRowEnd ?? props.$gridRowStart}`};
 `;

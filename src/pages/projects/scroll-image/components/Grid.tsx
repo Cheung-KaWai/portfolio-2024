@@ -10,8 +10,8 @@ const GridContainer = styled.div`
   width: 100svw;
   min-height: 100svh;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 25svh 100px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 50svh 100px;
   padding: 5rem;
   gap: 1rem;
 `;

@@ -173,7 +173,7 @@ vec2 rotate(vec2 uv, float rotation, vec2 mid) {
 }
 
 vec3 deformationCurve(vec3 position, vec2 uv, float uScrollVelocity) {
-  position.y = position.y - (sin(uv.x * PI) * min(abs(uScrollVelocity), 5.0) * sign(uScrollVelocity) * -0.01);
+  position.y = position.y - (sin(uv.x  * PI) * min(abs(uScrollVelocity), 5.0) * sign(uScrollVelocity) * -0.01);
 
   return position;
 }
